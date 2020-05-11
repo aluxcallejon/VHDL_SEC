@@ -1,0 +1,43 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to /home/ise/Xilinx/TRANSMISOR_OFDM/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> 
+Parameter xsthdpdir set to /home/ise/Xilinx/TRANSMISOR_OFDM/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> 
+WARNING:Xst:3164 - Option "-debug" found multiple times in the command line. Only the first occurence is considered.
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/home/ise/Xilinx/TRANSMISOR_OFDM/ipcore_dir/ROM.vhd" in Library work.
+Architecture rom_a of Entity rom is up to date.
+Compiling vhdl file "/home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhd" in Library work.
+Architecture div_frec_arq of Entity div_frec is up to date.
+Compiling vhdl file "/home/ise/Xilinx/TRANSMISOR_OFDM/PPDU.vhd" in Library work.
+Entity <ppdu> compiled.
+Entity <ppdu> (Architecture <ppdu_arq>) compiled.
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.16 secs
+ 
+--> 
+
+
+Total memory usage is 470468 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    1 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

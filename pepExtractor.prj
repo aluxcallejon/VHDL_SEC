@@ -1,0 +1,3 @@
+work	"PPDU.vhd"
+work	"div_frec.vhd"
+work	"ipcore_dir/ROM.vhd"

@@ -1,0 +1,10 @@
+AR ppdu ppdu_arq /home/ise/Xilinx/TRANSMISOR_OFDM/PPDU.vhd sub00/vhpl05 1589187568
+EN div_frec NULL /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhd sub00/vhpl02 1589187565
+EN rom NULL /home/ise/Xilinx/TRANSMISOR_OFDM/ipcore_dir/ROM.vhd sub00/vhpl00 1589187563
+EN ppdu NULL /home/ise/Xilinx/TRANSMISOR_OFDM/PPDU.vhd sub00/vhpl04 1589187567
+EN mapper NULL /home/ise/Xilinx/TRANSMISOR_OFDM/mapper.vhdl sub00/vhpl06 1589027288
+AR fec arch /home/ise/Xilinx/TRANSMISOR_OFDM/fec.vhdl sub00/vhpl08 1589188982
+EN fec NULL /home/ise/Xilinx/TRANSMISOR_OFDM/fec.vhdl sub00/vhpl07 1589189026
+AR rom rom_a /home/ise/Xilinx/TRANSMISOR_OFDM/ipcore_dir/ROM.vhd sub00/vhpl01 1589187564
+AR fec fec_arq /home/ise/Xilinx/TRANSMISOR_OFDM/fec.vhdl sub00/vhpl09 1589189027
+AR div_frec div_frec_arq /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhd sub00/vhpl03 1589187566

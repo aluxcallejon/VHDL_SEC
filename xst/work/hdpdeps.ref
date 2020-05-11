@@ -1,0 +1,25 @@
+V3 15
+FL /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhd 2020/05/08.10:24:53 P.20131013
+EN work/div_frec 1589187565 FL /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
+AR work/div_frec/div_frec_arq 1589187566 \
+      FL /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhd EN work/div_frec 1589187565
+FL /home/ise/Xilinx/TRANSMISOR_OFDM/fec.vhdl 2020/05/11.09:23:35 P.20131013
+AR work/fec/arch -1 FL /home/ise/Xilinx/TRANSMISOR_OFDM/fec.vhdl EN work/fec 1589189026
+EN work/fec 1589189026 \
+      FL /home/ise/Xilinx/TRANSMISOR_OFDM/fec.vhdl PB ieee/std_logic_1164 1381692176 \
+      PB ieee/NUMERIC_STD 1381692181 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/fec/fec_arq 1589189027 \
+      FL /home/ise/Xilinx/TRANSMISOR_OFDM/fec.vhdl EN work/fec 1589189026
+FL /home/ise/Xilinx/TRANSMISOR_OFDM/ipcore_dir/ROM.vhd 2020/05/08.12:02:22 P.20131013
+EN work/ROM 1589187563 FL /home/ise/Xilinx/TRANSMISOR_OFDM/ipcore_dir/ROM.vhd \
+      PB ieee/std_logic_1164 1381692176
+AR work/ROM/ROM_a 1589187564 \
+      FL /home/ise/Xilinx/TRANSMISOR_OFDM/ipcore_dir/ROM.vhd EN work/ROM 1589187563
+FL /home/ise/Xilinx/TRANSMISOR_OFDM/PPDU.vhd 2020/05/11.08:43:34 P.20131013
+EN work/PPDU 1589187567 FL /home/ise/Xilinx/TRANSMISOR_OFDM/PPDU.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/PPDU/PPDU_ARQ 1589187568 \
+      FL /home/ise/Xilinx/TRANSMISOR_OFDM/PPDU.vhd EN work/PPDU 1589187567 CP ROM \
+      CP div_frec

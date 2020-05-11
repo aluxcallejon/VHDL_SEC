@@ -1,0 +1,5 @@
+set -tmpdir "/home/ise/Xilinx/TRANSMISOR_OFDM/xst/projnav.tmp"
+set -xsthdpdir "/home/ise/Xilinx/TRANSMISOR_OFDM/xst"
+elaborate
+-ifn fec.prj
+-ifmt mixed
