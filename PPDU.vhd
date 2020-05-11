@@ -45,19 +45,19 @@ architecture PPDU_ARQ of PPDU is
 
 ---------SIGNALS------------------------------------------------------------------
 
-	 signal sat,p_sat				: STD_LOGIC;									--Variable de saturacion
-    signal p_data, data_aux	: STD_LOGIC;									--Proximo dato a transmitir
-    signal p_dat_valid			: STD_LOGIC;									--Indica si es valido el siguiente dato
-    signal douta					: std_logic_vector(7 downto 0);			--Salida
-    signal addra,p_addra		: std_logic_vector(6 downto 0);			--Direcciones
-    signal cuenta, p_cuenta	: integer range 0 to 7; --2^3 - 1		--Variable que nos llevara la cuenta
-    signal p_fin_tx				: STD_LOGIC;									--Signal que indica fin de transmision
-    constant SAT_CUENTA			: integer :=7;									--Constante de saturaciom
-    signal n_ceros,p_n_ceros	: integer range 0 to 255 := 0;								--Variable en la que almacenaremos el n ceros
-	 signal cuenta_direccion	: STD_LOGIC_VECTOR(6 DOWNTO 0);			--Variable en la que llevaremos la direccion a leer
-    type estados is (reposo,reset_ceros,cuenta_ceros,TX,TX_ceros);
-    signal estado, p_estado: estados;
-	 signal flag,p_flag			:STD_LOGIC := '0';
+	 signal sat,p_sat				  : STD_LOGIC;									    --Variable de saturacion
+   signal p_data, data_aux	: STD_LOGIC;									    --Proximo dato a transmitir
+   signal p_dat_valid			  : STD_LOGIC;									    --Indica si es valido el siguiente dato
+   signal douta					    : std_logic_vector(7 downto 0)    --Salida
+   signal addra,p_addra		  : std_logic_vector(6 downto 0);	  --Direcciones
+   signal cuenta, p_cuenta	: integer range 0 to 7;           --2^3 - 1 --Variable que nos llevara la cuenta
+   signal p_fin_tx				  : STD_LOGIC;									    --Signal que indica fin de transmision
+   constant SAT_CUENTA			: integer :=7;									  --Constante de saturaciom
+   signal n_ceros,p_n_ceros	: integer range 0 to 255 := 0;		--Variable en la que almacenaremos el n ceros
+	 signal cuenta_direccion	: STD_LOGIC_VECTOR(6 DOWNTO 0);		--Variable en la que llevaremos la direccion a leer
+   type estados is (reposo,reset_ceros,cuenta_ceros,TX_ceros_rellena,TX_ceros_decide);
+   signal estado, p_estado: estados;
+	 signal flag,p_flag			  :STD_LOGIC := '0';
 
 
 ---------COMPONENTES--------------------------------------------------------------
@@ -129,12 +129,12 @@ tx_sinc : process(clk,reset)
       data_valido <= '0';
       fin_tx    	<= '0';
       estado      <= reposo;
-		flag        <= '0'; 		--Sirve para ver si hemos llegado al final de la transmision
+		flag          <= '0'; 		--Sirve para ver si hemos llegado al final de la transmision
 
 		case modulacion is
-			when "00"	=> n_ceros <= 42;
-			when "01"	=> n_ceros <= 90;
-			when "11"	=> n_ceros <= 138;
+			when "00"	=>   n_ceros <= 48;
+			when "01"	=>   n_ceros <= 96;
+			when "11"	=>   n_ceros <= 144;
 			when others => n_ceros <= 0;
 		end case;
 
@@ -146,7 +146,7 @@ tx_sinc : process(clk,reset)
       fin_tx    	<= p_fin_tx;
       n_ceros   	<= p_n_ceros;
       estado      <= p_estado;
-		flag        <= p_flag;
+		  flag        <= p_flag;
 	 end if;
 end process;
 
@@ -162,7 +162,7 @@ begin
   p_fin_tx    <= '0';
   p_n_ceros   <= n_ceros;
   p_addra     <= addra;
-  p_flag 	  <= flag;
+  p_flag 	    <= flag;
 
 
 case( estado ) is
@@ -177,7 +177,7 @@ case( estado ) is
 
   if (sat='1' and douta="00000000" and flag = '0') then
 
-    p_estado<=TX_ceros;
+    p_estado<=TX_ceros_decide;
 
 end if;
 
@@ -191,7 +191,7 @@ when reset_ceros =>-------------------RESET_CEROS--------------
       when "11"	=>   p_n_ceros<= 144;
       when others =>   p_n_ceros<= 0;
     end case;
-      
+
   end if;
 
 
@@ -216,17 +216,34 @@ when  cuenta_ceros=>-------------------CUENTA_CEROS--------------
     end if;
 
 
-  when TX_ceros =>-------------------TX_CEROS--------------
-	
-	 p_estado <= reposo;
-    if(n_ceros /= 0) then --Tenemos que rellenar con n_ceros
-      p_n_ceros <= n_ceros - 1; --Decremento en uno
-      p_dat_valid <= '1'; --El siguiente data es valido, aunque sea un cero
-      p_data <= '0';
-    else --n_ceros es 0 por lo que reiniciamos el contador para la proxima y salimos
-      p_fin_tx <= '1';  --Hemos terminado la retransmision por lo que activamos senal.
-		p_flag <= '1';
-	 end if;
+  when TX_ceros_decide =>-------------------TX_CEROS--------------
+
+	 p_estado <= TX_ceros_rellena;
+    if(n_ceros < 5) then --Tenemos que rellenar con n_ceros
+    case modulacion is
+      when "00"	=>   p_n_ceros<=n_ceros+ 48; -- si este es el caso, hay que sumar N bits más para tx un simbolo de ceros y rellenar lo que quede
+      when "01"	=>   p_n_ceros<=n_ceros+ 96;
+      when "11"	=>   p_n_ceros<= n_ceros+144;
+      when others =>   p_n_ceros<=n_ceros+ 0;
+    end case;
+
+    end if;
+
+when TX_ceros_rellena =>-------------------TX_CEROS--------------
+
+
+if(n_ceros/=0 and sat = '1')then
+  p_n_ceros <= n_ceros - 1; -- Decremento en uno
+  p_data_valid <= '1';      -- El siguiente data es valido, aunque sea un cero
+  p_data <= '0';            -- transmitimos los ceros necesarios
+
+elsif (sat = '1') then      -- siempre entramos cuando sat = 1
+
+  p_flag<='1';         -- levantamos la bandera para que se sepa que se ha llegado al fin de tx
+  p_fin_tx<='1';       -- esta variable solo valdra '1' durante 1 ciclo de reloj
+  p_estado <= reposo;  -- volvemos a reposo. Por la bandera, no saldra de ahi.
+end if;
+
 end case;
 
 end process;
