@@ -1,0 +1,2 @@
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/scrambler.vhi -module scrambler -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work scrambler.vhdl 
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/scrambler.vhi -module scrambler -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work scrambler.vhdl 

@@ -89,6 +89,8 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
+	
+		modulacion <= "00";
       -- hold reset state for 100 ns.
 		reset <= '1';
 		
@@ -98,7 +100,7 @@ BEGIN
 
       wait for clk_period*10;
 		
-		modulacion <= "11";
+
 
       -- insert stimulus here 
 

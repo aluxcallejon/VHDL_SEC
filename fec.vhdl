@@ -60,11 +60,9 @@ architecture fec_arq of fec is
   signal registro, p_registro: std_logic_vector (6 downto 0);
   type estados is (reposo, desplaza, tx);
   signal estado, p_estado: estados;
-  signal p_salida:STD_LOGIC;
+  --signal p_salida:STD_LOGIC;
   signal p_dout_val: STD_LOGIC;
   signal p_o1, p_o2, o1_aux, o2_aux: STD_LOGIC;
-  --signal cuenta,p_cuenta : integer range 0 to 7;
-  --constant cero: STD_LOGIC := '0';
 
 -------------------------------------------------------------------------------
 
@@ -102,7 +100,7 @@ o2 <= o2_aux;
 
 ---------PROCESO COMBINACIONAL: MAQUINA DE ESTADOS-----------------------------
 
-  fsm : process(registro, estado, o1_aux, o2_aux)
+  fsm : process(registro, estado, o1_aux, o2_aux,data,fin_tx,data_valido)
   begin
 
 ---------POR DEFECTO---------
@@ -123,10 +121,7 @@ o2 <= o2_aux;
         if (data_valido = '1' and fin_tx = '0') then
           p_estado <= desplaza;
 
---        elsif (fin_tx = '1') then
---          p_estado <= reposo;
-
-        END if;
+        END if; 
 
       when desplaza =>-----------------DESPLAZA----------------------
 
@@ -136,25 +131,9 @@ o2 <= o2_aux;
       when tx =>-----------------------TRANSMISION-------------------
 
           p_o1 <= registro(0) xor registro (1) xor registro (3) xor registro (5) xor registro (6);
-          p_o2 <= registro(0) xor registro (3) xor registro (4) xor registro (6);
+          p_o2 <= registro(0) xor registro (3) xor registro (2) xor registro (6);
           p_dout_val <= '1';
           p_estado <= reposo;
-
-
---      when f_tx =>-------------------FIN DE TRANSMISION------------
---
---        if (cuenta <= 5) then
---
---          p_registro <= cero & registro (6 downto 1);
---          p_o1 <= registro(0) xor registro (1) xor registro (3) xor registro (5) xor registro (6);
---          p_o2 <= registro(0) xor registro (3) xor registro (4) xor registro (6);
---
---          p_cuenta <= cuenta + 1;
---
---        else
---          p_estado <= reposo;
---
---        end if;
 
     end case;
 

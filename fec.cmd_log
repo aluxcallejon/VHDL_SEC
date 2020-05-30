@@ -1,0 +1,1 @@
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/fec.vhi -module fec -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work fec.vhdl 
