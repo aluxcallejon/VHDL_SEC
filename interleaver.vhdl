@@ -44,7 +44,7 @@ entity interleaver is
   data_valid:  in  STD_LOGIC;
   addrb:			in  STD_LOGIC_VECTOR(8 downto 0);
   Ready     :  out STD_LOGIC;
-  data_out:    out std_logic_VECTOR(0 DOWNTO 0);
+  data_out  :  out std_logic_VECTOR(0 DOWNTO 0);
   dir_que_escribo: out std_logic_vector (8 DOWNTO 0) -- necesitamos ponerla como salida porque el tb la necesitara para sacarla en un fichero
   );
 end entity;

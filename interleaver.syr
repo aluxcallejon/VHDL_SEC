@@ -1,0 +1,446 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.12 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.12 secs
+ 
+--> 
+Reading design: interleaver.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "interleaver.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "interleaver"
+Output Format                      : NGC
+Target Device                      : xc3s100e-5-cp132
+
+---- Source Options
+Top Module Name                    : interleaver
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+---- Other Options
+Cores Search Directories           : {"ipcore_dir"  }
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_INTERLEAVER.vhd" in Library work.
+Entity <RAM_INTERLEAVER> compiled.
+Entity <RAM_INTERLEAVER> (Architecture <RAM_INTERLEAVER_a>) compiled.
+Compiling vhdl file "/home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhdl" in Library work.
+Entity <interleaver> compiled.
+Entity <interleaver> (Architecture <arch>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <interleaver> in library <work> (architecture <arch>) with generics.
+	n_columnas = 12
+	n_filas = 7
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing generic Entity <interleaver> in library <work> (Architecture <arch>).
+	n_columnas = 12
+	n_filas = 7
+WARNING:Xst:2211 - "/home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhdl" line 88: Instantiating black box module <RAM_INTERLEAVER>.
+Entity <interleaver> analyzed. Unit <interleaver> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <interleaver>.
+    Related source file is "/home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhdl".
+    Found finite state machine <FSM_0> for signal <estado>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 7                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 4                                              |
+    | Clock              | clk                       (rising_edge)        |
+    | Reset              | reset                     (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | reposo                                         |
+    | Power Up State     | reposo                                         |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 1-bit register for signal <Ready>.
+    Found 4-bit register for signal <cuenta_columnas>.
+    Found 4-bit adder for signal <cuenta_columnas$addsub0000> created at line 174.
+    Found 3-bit register for signal <cuenta_filas>.
+    Found 3-bit adder for signal <cuenta_filas$addsub0000> created at line 166.
+    Found 9-bit register for signal <dir>.
+    Found 9-bit adder for signal <dir$share0000> created at line 165.
+    Found 1-bit register for signal <entrada_ram<0>>.
+    Found 3-bit comparator less for signal <estado$cmp_lt0000> created at line 165.
+    Found 1-bit register for signal <write_enable<0>>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred  19 D-type flip-flop(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred   1 Comparator(s).
+Unit <interleaver> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 3
+ 3-bit adder                                           : 1
+ 4-bit adder                                           : 1
+ 9-bit adder                                           : 1
+# Registers                                            : 6
+ 1-bit register                                        : 3
+ 3-bit register                                        : 1
+ 4-bit register                                        : 1
+ 9-bit register                                        : 1
+# Comparators                                          : 1
+ 3-bit comparator less                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <estado/FSM> on signal <estado[1:2]> with gray encoding.
+-----------------------
+ State     | Encoding
+-----------------------
+ reposo    | 00
+ desordena | 11
+ escribe   | 01
+ transmite | 10
+-----------------------
+Reading core <ipcore_dir/RAM_INTERLEAVER.ngc>.
+Loading core <RAM_INTERLEAVER> for timing and area information for instance <MI_Ram_Interleaver>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 1
+# Adders/Subtractors                                   : 3
+ 3-bit adder                                           : 1
+ 4-bit adder                                           : 1
+ 9-bit adder                                           : 1
+# Registers                                            : 19
+ Flip-Flops                                            : 19
+# Comparators                                          : 1
+ 3-bit comparator less                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <interleaver> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block interleaver, actual ratio is 3.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 21
+ Flip-Flops                                            : 21
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : interleaver.ngr
+Top Level Output File Name         : interleaver
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 24
+
+Cell Usage :
+# BELS                             : 77
+#      GND                         : 2
+#      INV                         : 1
+#      LUT2                        : 11
+#      LUT3                        : 9
+#      LUT4                        : 23
+#      LUT4_D                      : 3
+#      LUT4_L                      : 4
+#      MULT_AND                    : 3
+#      MUXCY                       : 8
+#      MUXF5                       : 3
+#      VCC                         : 1
+#      XORCY                       : 9
+# FlipFlops/Latches                : 21
+#      FDC                         : 19
+#      FDCE                        : 1
+#      FDE                         : 1
+# RAMS                             : 1
+#      RAMB16_S36_S36              : 1
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 23
+#      IBUF                        : 12
+#      OBUF                        : 11
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s100ecp132-5 
+
+ Number of Slices:                       27  out of    960     2%  
+ Number of Slice Flip Flops:             21  out of   1920     1%  
+ Number of 4 input LUTs:                 51  out of   1920     2%  
+ Number of IOs:                          24
+ Number of bonded IOBs:                  24  out of     83    28%  
+ Number of BRAMs:                         1  out of      4    25%  
+ Number of GCLKs:                         1  out of     24     4%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clk                                | BUFGP                  | 22    |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+-----------------------------------+------------------------+-------+
+Control Signal                     | Buffer(FF name)        | Load  |
+-----------------------------------+------------------------+-------+
+reset                              | IBUF                   | 20    |
+-----------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -5
+
+   Minimum period: 6.406ns (Maximum Frequency: 156.104MHz)
+   Minimum input arrival time before clock: 3.547ns
+   Maximum output required time after clock: 5.962ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 6.406ns (frequency: 156.104MHz)
+  Total number of paths / destination ports: 637 / 33
+-------------------------------------------------------------------------
+Delay:               6.406ns (Levels of Logic = 11)
+  Source:            cuenta_filas_1 (FF)
+  Destination:       dir_8 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: cuenta_filas_1 to dir_8
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             6   0.514   0.721  cuenta_filas_1 (cuenta_filas_1)
+     LUT3:I0->O           17   0.612   0.893  estado_cmp_lt00001 (estado_cmp_lt0000)
+     MULT_AND:I0->LO       0   0.645   0.000  dir_mux0001<1>_mand (dir_mux0001<1>_mand1)
+     MUXCY:DI->O           1   0.773   0.000  Madd_dir_share0000_cy<1> (Madd_dir_share0000_cy<1>)
+     MUXCY:CI->O           1   0.052   0.000  Madd_dir_share0000_cy<2> (Madd_dir_share0000_cy<2>)
+     MUXCY:CI->O           1   0.052   0.000  Madd_dir_share0000_cy<3> (Madd_dir_share0000_cy<3>)
+     MUXCY:CI->O           1   0.052   0.000  Madd_dir_share0000_cy<4> (Madd_dir_share0000_cy<4>)
+     MUXCY:CI->O           1   0.052   0.000  Madd_dir_share0000_cy<5> (Madd_dir_share0000_cy<5>)
+     MUXCY:CI->O           1   0.052   0.000  Madd_dir_share0000_cy<6> (Madd_dir_share0000_cy<6>)
+     MUXCY:CI->O           0   0.051   0.000  Madd_dir_share0000_cy<7> (Madd_dir_share0000_cy<7>)
+     XORCY:CI->O           1   0.699   0.360  Madd_dir_share0000_xor<8> (dir_share0000<8>)
+     LUT4:I3->O            1   0.612   0.000  dir_mux0000<8>1 (dir_mux0000<8>)
+     FDC:D                     0.268          dir_8
+    ----------------------------------------
+    Total                      6.406ns (4.432ns logic, 1.974ns route)
+                                       (69.2% logic, 30.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 13 / 13
+-------------------------------------------------------------------------
+Offset:              3.547ns (Levels of Logic = 2)
+  Source:            reset (PAD)
+  Destination:       entrada_ram_0 (FF)
+  Destination Clock: clk rising
+
+  Data Path: reset to entrada_ram_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            22   1.106   0.989  reset_IBUF (reset_IBUF)
+     INV:I->O              1   0.612   0.357  reset_inv1_INV_0 (reset_inv)
+     FDE:CE                    0.483          entrada_ram_0
+    ----------------------------------------
+    Total                      3.547ns (2.201ns logic, 1.346ns route)
+                                       (62.0% logic, 38.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 11 / 11
+-------------------------------------------------------------------------
+Offset:              5.962ns (Levels of Logic = 2)
+  Source:            MI_Ram_Interleaver/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s3_init.ram/dpram.dp36x36.ram (RAM)
+  Destination:       data_out<0> (PAD)
+  Source Clock:      clk rising
+
+  Data Path: MI_Ram_Interleaver/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s3_init.ram/dpram.dp36x36.ram to data_out<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB16_S36_S36:CLKB->DOB0    1   2.436   0.357  U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s3_init.ram/dpram.dp36x36.ram (doutb<0>)
+     end scope: 'MI_Ram_Interleaver'
+     OBUF:I->O                 3.169          data_out_0_OBUF (data_out<0>)
+    ----------------------------------------
+    Total                      5.962ns (5.605ns logic, 0.357ns route)
+                                       (94.0% logic, 6.0% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 20.00 secs
+Total CPU time to Xst completion: 19.06 secs
+ 
+--> 
+
+
+Total memory usage is 522856 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    1 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

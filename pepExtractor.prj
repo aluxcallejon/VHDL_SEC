@@ -1,3 +1,2 @@
-work	"PPDU.vhd"
-work	"div_frec.vhd"
-work	"ipcore_dir/ROM.vhd"
+work	"interleaver.vhdl"
+work	"ipcore_dir/RAM_INTERLEAVER.vhd"

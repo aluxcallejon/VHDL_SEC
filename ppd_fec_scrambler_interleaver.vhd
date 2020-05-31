@@ -60,7 +60,7 @@ architecture Behavioral of ppd_fec_scrambler_interleaver is
 		data_valid : IN std_logic;
 		addrb : IN std_logic_vector(8 downto 0);          
 		Ready : OUT std_logic;
-		data_out : OUT std_logic_vector(0 to 0);
+		data_out : OUT std_logic_vector(0 downto 0);
 		dir_que_escribo: out std_logic_vector (8 downto 0)
 		);
 	END COMPONENT;
