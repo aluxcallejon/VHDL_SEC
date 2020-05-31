@@ -27,6 +27,9 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
+use std.TEXTIO.all;
+USE ieee.numeric_std.ALL; -- proporciona unsigned y signed entre otros
+use ieee.std_logic_unsigned.all; 
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -99,5 +102,6 @@ BEGIN
 
       wait;
    end process;
+	
 
 END;

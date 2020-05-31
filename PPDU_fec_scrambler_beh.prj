@@ -1,0 +1,7 @@
+vhdl work "ipcore_dir/ROM.vhd"
+vhdl work "div_frec.vhd"
+vhdl work "PPDU.vhd"
+vhdl work "fec.vhdl"
+vhdl work "scrambler.vhdl"
+vhdl work "PPDU_FEC.vhd"
+vhdl work "PPDU_fec_scrambler.vhd"

@@ -12,18 +12,20 @@
          <ClosedNode>/PPDU_fec_scrambler - PPDU_fec_scrambler_arq |home|ise|Xilinx|TRANSMISOR_OFDM|PPDU_fec_scrambler.vhd/Inst_PPDU_fec - PPDU_fec - PPDU_fec_arq/Inst_PPDU - PPDU - PPDU_ARQ</ClosedNode>
          <ClosedNode>/interleaver - arch C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|interleaver.vhdl</ClosedNode>
          <ClosedNode>/mapper - arch |home|ise|Xilinx|TRANSMISOR_OFDM|mapper.vhdl</ClosedNode>
+         <ClosedNode>/ppd_fec_scrambler_interleaver - Behavioral |home|ise|SEC|TRANSMISOR_OFDM|ppd_fec_scrambler_interleaver.vhd/Inst_PPDU_fec_scrambler - PPDU_fec_scrambler - PPDU_fec_scrambler_arq</ClosedNode>
+         <ClosedNode>/ppd_fec_scrambler_interleaver - Behavioral |home|ise|SEC|TRANSMISOR_OFDM|ppd_fec_scrambler_interleaver.vhd/Inst_interleaver - interleaver - arch</ClosedNode>
          <ClosedNode>/ppd_fec_scrambler_interleaver - Behavioral |home|ise|Xilinx|TRANSMISOR_OFDM|ppd_fec_scrambler_interleaver.vhd/Inst_PPDU_fec_scrambler - PPDU_fec_scrambler - PPDU_fec_scrambler_arq</ClosedNode>
          <ClosedNode>/ppd_fec_scrambler_interleaver - Behavioral |home|ise|Xilinx|TRANSMISOR_OFDM|ppd_fec_scrambler_interleaver.vhd/Inst_PPDU_fec_scrambler - PPDU_fec_scrambler - PPDU_fec_scrambler_arq/Inst_PPDU_fec - PPDU_fec - PPDU_fec_arq/Inst_PPDU - PPDU - PPDU_ARQ</ClosedNode>
          <ClosedNode>/ppdu - arch |home|ise|Xilinx|TRANSMISOR_OFDM|ppdu.vhdl</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>MI_Ram_Interleaver - RAM_INTERLEAVER (/home/ise/Xilinx/TRANSMISOR_OFDM/ipcore_dir/RAM_INTERLEAVER.xco)</SelectedItem>
+         <SelectedItem>RAM_mapper (/home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_mapper.xco)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000002f2000000020000000000000000000000000200000064ffffffff000000810000000300000002000002f20000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>MI_Ram_Interleaver - RAM_INTERLEAVER (/home/ise/Xilinx/TRANSMISOR_OFDM/ipcore_dir/RAM_INTERLEAVER.xco)</CurrentItem>
+      <CurrentItem>RAM_mapper (/home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_mapper.xco)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
@@ -36,13 +38,13 @@
          <ClosedNode>User Constraints</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem/>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001b5000000010000000100000000000000000000000064ffffffff000000810000000000000001000001b50000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000161000000010000000100000000000000000000000064ffffffff000000810000000000000001000001610000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem/>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView guiview="File" >
       <ClosedNodes>
@@ -51,7 +53,7 @@
       <SelectedItems/>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000000000000001000000000000000000000000000000000000039f000000040101000100000000000000000000000064ffffffff0000008100000000000000040000008200000001000000000000005d00000001000000000000008400000001000000000000023c0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000000000000001000000000000000000000000000000000000027b000000040101000100000000000000000000000064ffffffff0000008100000000000000040000008200000001000000000000005d0000000100000000000000840000000100000000000001180000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>div_frec.vhd</CurrentItem>
    </ItemView>
@@ -66,54 +68,66 @@
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>work</CurrentItem>
    </ItemView>
-   <SourceProcessView>000000ff0000000000000002000001400000011c01000000060100000002</SourceProcessView>
-   <CurrentView>Behavioral Simulation</CurrentView>
+   <SourceProcessView>000000ff0000000000000002000000f00000007f01000000060100000002</SourceProcessView>
+   <CurrentView>Implementation</CurrentView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
          <ClosedNode>Design Utilities/Compile HDL Simulation Libraries</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem/>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000f8000000010000000100000000000000000000000064ffffffff000000810000000000000001000000f80000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000161000000010000000100000000000000000000000064ffffffff000000810000000000000001000001610000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem/>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" guiview="Source" compilemode="AutoCompile" >
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
          <ClosedNode>/mapper - arch C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|mapper.vhdl</ClosedNode>
+         <ClosedNode>/mapper - arch |home|ise|SEC|TRANSMISOR_OFDM|mapper.vhdl</ClosedNode>
          <ClosedNode>/mapper - arch |home|ise|Xilinx|TRANSMISOR_OFDM|mapper.vhdl</ClosedNode>
          <ClosedNode>/tb_PPDU - behavior C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|tb_PPDU.vhd</ClosedNode>
+         <ClosedNode>/tb_PPDU - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_PPDU.vhd</ClosedNode>
          <ClosedNode>/tb_PPDU - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_PPDU.vhd</ClosedNode>
          <ClosedNode>/tb_PPDU_fec - behavior C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|tb_PPDU_fec.vhd</ClosedNode>
          <ClosedNode>/tb_PPDU_fec - behavior C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|tb_PPDU_fec.vhd/uut - PPDU_fec - PPDU_fec_arq/Inst_PPDU - PPDU - PPDU_ARQ</ClosedNode>
+         <ClosedNode>/tb_PPDU_fec - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_PPDU_fec.vhd</ClosedNode>
+         <ClosedNode>/tb_PPDU_fec - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_PPDU_fec.vhd/uut - PPDU_fec - PPDU_fec_arq/Inst_PPDU - PPDU - PPDU_ARQ</ClosedNode>
          <ClosedNode>/tb_PPDU_fec - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_PPDU_fec.vhd</ClosedNode>
          <ClosedNode>/tb_PPDU_fec - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_PPDU_fec.vhd/uut - PPDU_fec - PPDU_fec_arq/Inst_PPDU - PPDU - PPDU_ARQ</ClosedNode>
          <ClosedNode>/tb_Transmisor - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_Transmisor.vhd</ClosedNode>
          <ClosedNode>/tb_div_frec - behavior C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|tb_div_frec.vhd</ClosedNode>
+         <ClosedNode>/tb_div_frec - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_div_frec.vhd</ClosedNode>
          <ClosedNode>/tb_div_frec - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_div_frec.vhd</ClosedNode>
          <ClosedNode>/tb_fec - behavior C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|tb_fec.vhd</ClosedNode>
+         <ClosedNode>/tb_fec - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_fec.vhd</ClosedNode>
          <ClosedNode>/tb_fec - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_fec.vhd</ClosedNode>
          <ClosedNode>/tb_interleaver - behavior C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|tb_interleaver.vhd/uut - ppd_fec_scrambler_interleaver - Behavioral/Inst_PPDU_fec_scrambler - PPDU_fec_scrambler - PPDU_fec_scrambler_arq/Inst_PPDU_fec - PPDU_fec - PPDU_fec_arq</ClosedNode>
+         <ClosedNode>/tb_interleaver - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_interleaver.vhd</ClosedNode>
+         <ClosedNode>/tb_interleaver - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_interleaver.vhd/uut - ppd_fec_scrambler_interleaver - Behavioral/Inst_PPDU_fec_scrambler - PPDU_fec_scrambler - PPDU_fec_scrambler_arq/Inst_PPDU_fec - PPDU_fec - PPDU_fec_arq/Inst_PPDU - PPDU - PPDU_ARQ</ClosedNode>
+         <ClosedNode>/tb_interleaver - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_interleaver.vhd/uut - ppd_fec_scrambler_interleaver - Behavioral/Inst_interleaver - interleaver - arch</ClosedNode>
          <ClosedNode>/tb_interleaver - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_interleaver.vhd/uut - ppd_fec_scrambler_interleaver - Behavioral/Inst_PPDU_fec_scrambler - PPDU_fec_scrambler - PPDU_fec_scrambler_arq</ClosedNode>
          <ClosedNode>/tb_interleaver - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_interleaver.vhd/uut - ppd_fec_scrambler_interleaver - Behavioral/Inst_PPDU_fec_scrambler - PPDU_fec_scrambler - PPDU_fec_scrambler_arq/Inst_PPDU_fec - PPDU_fec - PPDU_fec_arq</ClosedNode>
          <ClosedNode>/tb_ppdu_fec_scrambler - behavior C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|tb_ppdu_fec_scrambler.vhd</ClosedNode>
          <ClosedNode>/tb_ppdu_fec_scrambler - behavior C:|Users|marij|OneDrive|Universidad|SEC|Trabajo de SEC|TRANSMISOR_OFDM_V1.2|TRANSMISOR_OFDM|tb_ppdu_fec_scrambler.vhd/uut - PPDU_fec_scrambler - PPDU_fec_scrambler_arq</ClosedNode>
+         <ClosedNode>/tb_ppdu_fec_scrambler - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_ppdu_fec_scrambler.vhd</ClosedNode>
+         <ClosedNode>/tb_ppdu_fec_scrambler - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_ppdu_fec_scrambler.vhd/uut - PPDU_fec_scrambler - PPDU_fec_scrambler_arq</ClosedNode>
+         <ClosedNode>/tb_ppdu_fec_scrambler - behavior |home|ise|SEC|TRANSMISOR_OFDM|tb_ppdu_fec_scrambler.vhd/uut - PPDU_fec_scrambler - PPDU_fec_scrambler_arq/Inst_PPDU_fec - PPDU_fec - PPDU_fec_arq</ClosedNode>
          <ClosedNode>/tb_ppdu_fec_scrambler - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_ppdu_fec_scrambler.vhd</ClosedNode>
          <ClosedNode>/tb_ppdu_fec_scrambler - behavior |home|ise|Xilinx|TRANSMISOR_OFDM|tb_ppdu_fec_scrambler.vhd/uut - PPDU_fec_scrambler - PPDU_fec_scrambler_arq/Inst_PPDU_fec - PPDU_fec - PPDU_fec_arq</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>tb_interleaver - behavior (/home/ise/Xilinx/TRANSMISOR_OFDM/tb_interleaver.vhd)</SelectedItem>
+         <SelectedItem>tb_ppdu_fec_scrambler - behavior (/home/ise/SEC/TRANSMISOR_OFDM/tb_ppdu_fec_scrambler.vhd)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >7</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000306000000020000000000000000000000000200000064ffffffff000000810000000300000002000003060000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001e1000000020000000000000000000000000200000064ffffffff000000810000000300000002000001e10000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>tb_interleaver - behavior (/home/ise/Xilinx/TRANSMISOR_OFDM/tb_interleaver.vhd)</CurrentItem>
+      <CurrentItem>tb_ppdu_fec_scrambler - behavior (/home/ise/SEC/TRANSMISOR_OFDM/tb_ppdu_fec_scrambler.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -121,13 +135,13 @@
          <ClosedNode>Design Utilities/Compile HDL Simulation Libraries</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>Design Utilities</SelectedItem>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001c4000000010000000100000000000000000000000064ffffffff000000810000000000000001000001c40000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000170000000010000000100000000000000000000000064ffffffff000000810000000000000001000001700000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>Design Utilities</CurrentItem>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
@@ -138,7 +152,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >1</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001b5000000010000000100000000000000000000000064ffffffff000000810000000000000001000001b50000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000170000000010000000100000000000000000000000064ffffffff000000810000000000000001000001700000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>Simulate Behavioral Model</CurrentItem>
    </ItemView>
@@ -149,9 +163,9 @@
       <SelectedItems>
          <SelectedItem></SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >1</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001b5000000010000000100000000000000000000000064ffffffff000000810000000000000001000001b50000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000161000000010000000100000000000000000000000064ffffffff000000810000000000000001000001610000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem></CurrentItem>
    </ItemView>
@@ -173,13 +187,13 @@
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem/>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001c4000000010000000100000000000000000000000064ffffffff000000810000000000000001000001c40000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000170000000010000000100000000000000000000000064ffffffff000000810000000000000001000001700000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem/>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_BMM" guiview="Process" >
       <ClosedNodes>
@@ -190,7 +204,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000f8000000010000000100000000000000000000000064ffffffff000000810000000000000001000000f80000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000185000000010000000100000000000000000000000064ffffffff000000810000000000000001000001850000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem/>
    </ItemView>

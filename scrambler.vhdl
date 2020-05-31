@@ -53,6 +53,7 @@ architecture arch of scrambler is
   signal estado, p_estado: estados;
   signal salida_aux :STD_LOGIC;
   signal contador, p_contador: std_logic_vector (1 downto 0);
+  signal contador2,p_contador2: unsigned (9 downto 0);
 
 -------------------------------------------------------------------------------
 begin
@@ -71,25 +72,28 @@ salida <= salida_aux;
       dout_val <= '0'            ;
       estado   <= reposo         ;
 		contador <= (others => '0');
-
+		contador2 <= (others => '0');
     elsif (clk'event and clk='1') then
       registro <= p_registro;
       salida_aux   <= p_salida  ;
       dout_val <= p_dout_val;
       estado   <= p_estado  ;
 		contador <= p_contador;
+		contador2 <= p_contador2;
     end if;
   end process;
 
 ---------PROCESO COMBINACIONAL-------------------------------------------------
 
-  fsm : process(registro,estado,salida_aux, data_valid, o1, o2, contador)
+  fsm : process(registro,estado,salida_aux, data_valid, o1, o2, contador,contador2)
   begin
     p_dout_val <= '0';
     p_salida   <= salida_aux;
     p_estado   <= estado;
     p_registro <= registro;
 	 p_contador <= contador;
+	 p_contador2 <= contador2;
+
 
     case( estado ) is
 
@@ -101,7 +105,8 @@ salida <= salida_aux;
       end if;
 
       when tx_o1 =>-----------------------TRANSMITE_O1-------------
-
+		p_contador2 <= contador2 + 1;
+			
       p_dout_val <= '1';
       p_salida <= o1 xor registro(3) xor registro(6);
       p_estado <= desplaza_o1;
@@ -125,7 +130,7 @@ salida <= salida_aux;
 		
 
       when tx_o2 =>-----------------------TRANSMITE_O2-------------
-
+		p_contador2 <= contador2 + 1;
       p_dout_val <= '1';
       p_salida <= o2 xor registro(3) xor registro(6);
       p_estado <= desplaza_o2;

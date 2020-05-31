@@ -27,6 +27,9 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
+use std.TEXTIO.all; -- libreria para trabajar con ficheros
+USE ieee.numeric_std.ALL; -- proporciona unsigned y signed entre otros
+use ieee.std_logic_unsigned.all;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -93,5 +96,24 @@ BEGIN
 
       wait;
    end process;
+	
+	escribe_salida: process
+	
+		variable linea: line;
+		variable valor_integer: integer;
+		variable bit_direccion: std_logic_vector (8 downto 0);
+		FILE fout2: text open write_mode is "Salida_Scrambler.txt"; -- el fichero donde escribamos los valores sera ram_interleaver.txt
+		variable cuenta_bucle: integer;
+		
+	begin
+	wait until data_valido_scrambler = '1';
+	if(data_scrambler='1') then
+	valor_integer := 1; 
+	else
+	valor_integer := 0; 
+	end if;
+				write(linea, valor_integer);
+				writeline(fout2, linea);
+	end process;
 
 END;

@@ -83,7 +83,7 @@ END COMPONENT;
 begin
 
 	dir_que_escribo <= dir;
-
+	entrada_ram(0)<=data;
 
 MI_Ram_Interleaver : RAM_INTERLEAVER
   PORT MAP (
@@ -113,6 +113,7 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
       Ready <= '0';
 		dir <= (others=> '0');
 		write_enable <= "0";
+		--entrada_ram<="0";
 		-- data_out <= "0";
 		
 		
@@ -121,7 +122,7 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
     estado <= p_estado;
     cuenta_columnas <= p_cuenta_columnas;
     cuenta_filas <= p_cuenta_filas;
-	 entrada_ram <= p_entrada_ram;
+	-- entrada_ram <= p_entrada_ram;
 	 dir <= p_dir;
 	 write_enable <= p_write_enable;
 	end if;
@@ -138,7 +139,7 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
     p_ready <= '0';
     p_cuenta_filas <= cuenta_filas;
     p_cuenta_columnas <= cuenta_columnas;
-	 p_entrada_ram <= entrada_ram;
+	-- p_entrada_ram <= entrada_ram;
 	 p_dir <= dir;
 	 p_write_enable <= "0";
 	  
@@ -154,7 +155,7 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
 		  
 		when Escribe =>-------------ESCRIBE---------------------------
 			
-			p_entrada_ram(0) <= data;
+			--p_entrada_ram(0) <= data;
 			p_write_enable <= "1";
 			p_estado <= Desordena;
 
@@ -184,7 +185,7 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
 				
       when Transmite =>-----------TRANSMITE--------------------------
 
-	--	  p_write_enable <= "0";
+
         p_ready<='1';
         p_estado<=reposo;
 		  p_dir <= (others=> '0');

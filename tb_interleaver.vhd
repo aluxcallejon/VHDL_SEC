@@ -155,11 +155,12 @@ BEGIN
 		addrb <= (others => '0');
 		wait until ready = '1';
 		
-			for j in 0 to cuenta_bucle loop
+			for j in 1 to cuenta_bucle loop
 			
 				wait for clk_period;
-				addrb <= (addrb + '1');
-				valor_integer := to_integer(unsigned(dout)); 
+				
+				valor_integer := to_integer(unsigned(dout));
+            addrb <= (addrb + '1');				
 				write(linea, valor_integer);
 				writeline(fout2, linea);
 		

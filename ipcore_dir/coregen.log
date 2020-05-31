@@ -1,5 +1,9 @@
-INFO:sim:172 - Generating IP...
-Applying current project options...
-Finished applying current project options.
+Welcome to Xilinx CORE Generator.
+Help system initialized.
+The IP Catalog has been reloaded.
+Opening project file /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/coregen.cgp.
+Recustomize and Generate (Under Original Project Settings)INFO:sim:172 - Generating IP...
+WARNING:sim - VHDL simulation file type 'Behavioral' is not valid for this core.
+   Overriding with simulation file type 'Structural'.
 Cancelled executing Tcl generator.
-Wrote CGP file for project 'RAM_INTERLEAVER'.
+Closed project file.

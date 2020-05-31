@@ -42,7 +42,6 @@ entity mapper is
   Entrada: in STD_LOGIC;
   Ready:   in STD_LOGIC;
   RFS:     in STD_LOGIC;
-  Modulacion : in STD_LOGIC_VECTOR (1 DOWNTO 0);
   Xn_re:   out std_logic_vector (7 DOWNTO 0);
   Xn_im:   out std_logic_vector (7 DOWNTO 0);
   TX:      out STD_LOGIC; --start del ifft
@@ -59,19 +58,21 @@ architecture arch of mapper is
   type status is (Reposo, Agrupar, Calcula_symb, Calcula_datos, escribe_RAM, Transmite);
   signal estado,  p_estado   : status;
   signal p_xn_im, p_xn_re : std_logic_vector (7 downto 0);
+  signal p_xn_im_RAM, p_xn_re_RAM : std_logic_vector (7 downto 0);
+  signal xn_im_RAM, xn_re_RAM : std_logic_vector (7 downto 0);
+  signal aux_xn_im,aux_xn_re : std_logic_vector(7 downto 0);
   signal simbolo, p_simbolo : std_logic_vector(2 downto 0):="000";
-  signal contador, p_contador : integer range 0 to 127;
   signal group_cont,p_group_cont:integer range 0 to 2;
   signal wea,p_wea: STD_LOGIC_VECTOR (0 DOWNTO 0);
   signal dina,p_dina:STD_LOGIC_VECTOR(15 DOWNTO 0);
-  signal addra,p_addra:STD_LOGIC_VECTOR(6 DOWNTO 0):= "00001111";
-  signal douta, p_douta: STD_LOGIC_VECTOR (15 downto 0);
+  signal addra,p_addra:STD_LOGIC_VECTOR(6 DOWNTO 0):= "0001111";
+  signal douta: STD_LOGIC_VECTOR (15 downto 0);
   signal p_dir_interleaver, dir_interleaver_aux: std_logic_vector (8 downto 0);
   signal phase, p_phase: std_logic_vector (2 downto 0);
-  signal phase_ant, p_phase_ant: std_logic_vector (7 downto 0);
-  signal phase_std, p_phase_std: std_logic_vector (2 downto 0);
+  signal phase_ant, p_phase_ant: std_logic_vector (2 downto 0);
   signal Abk, p_Abk: std_logic_vector (2 downto 0);
   signal p_tx: STD_LOGIC;
+
 
 
 
@@ -79,10 +80,9 @@ architecture arch of mapper is
 
 
 
-  COMPONENT RAM
+  COMPONENT RAM_mapper
  PORT (
    clka : IN STD_LOGIC;
-   rsta : IN STD_LOGIC;
    wea : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
    addra : IN STD_LOGIC_VECTOR(6 DOWNTO 0); -- 128 direcciones que le llegaran a la IFFT
    dina : IN STD_LOGIC_VECTOR(15 DOWNTO 0); -- fase codificada que viene de rom_grande
@@ -95,14 +95,13 @@ END COMPONENT;
 
 begin
 
-  dir_interleaver <= dir_interleaver_aux;
-
-
+ dir_interleaver <= dir_interleaver_aux;
+ xn_re<=aux_xn_re;
+ xn_im<=aux_xn_im;
   ------------- Begin Cut here for INSTANTIATION Template ----- INST_TAG
-  RAM : RAM
+  ROM : RAM_mapper
     PORT MAP (
       clka => clk,
-      rsta => reset,
       wea => wea,
       addra => addra,
       dina => dina,
@@ -110,7 +109,7 @@ begin
     );
 
 
----------PROCESO SINCRONO------------------------------------------------------
+---------PROCESO SINCRONONO------------------------------------------------------
 
  sinc : process(clk, reset)
  begin
@@ -121,12 +120,13 @@ begin
      -- las que quedan se ponen a 0. De esa forma, se puede usar la constelacion de la 8psk para modular las demas.
 
      group_cont <= 0;
-     wea   <= '0';
-     dina  <= (others => '0');
-     addra <= "001111";
-     douta <= (others => '0');
-     Xn_im <= (others => '0');
-     Xn_re <= (others => '0');
+     wea(0)   <= '0';
+     dina  <= "0000000000000000";
+     addra <= "0001111";
+     Xn_im_RAM <= (others => '0');
+     Xn_re_RAM <= (others => '0');
+	  aux_Xn_im <= (others => '0');
+     aux_Xn_re <= (others => '0');
      dir_interleaver_aux <= (others => '0');
      phase <= "100";
      phase_ant <= "100";
@@ -142,9 +142,10 @@ begin
      wea        <= p_wea;
      dina       <= p_dina;
      addra      <= p_addra;
-     douta      <= p_douta;
-     Xn_im      <= p_xn_im;
-     Xn_re      <= p_xn_re;
+     aux_Xn_im  <= p_xn_im;
+     aux_Xn_re  <= p_xn_re;
+	  Xn_im_RAM  <= p_xn_im_RAM;
+     Xn_re_RAM  <= p_xn_re_RAM;
      TX         <= p_TX;
      dir_interleaver_aux <= p_dir_interleaver;
      phase      <= p_phase;
@@ -158,18 +159,21 @@ begin
  end process;
 
 ---------MAQUINA DE ESTADOS----------------------------------------------------
-fsm : process(Ready,dir_interleaver_aux,simbolo,Abk,phase,RFS,group_cont,addra,estado)
+
+fsm : process(Ready,douta,dir_interleaver_aux,simbolo,Abk,phase,RFS,group_cont,addra,estado,dina,aux_xn_im,aux_xn_re,xn_im_RAM,xn_re_RAM,phase_ant,Entrada)
 begin
 
        p_estado     <= reposo;
        p_simbolo    <= simbolo; -- que coja los Nbpc ultimos. Es la de referencia
        p_group_cont <= group_cont;
-       p_wea        <= '0';
+       p_wea(0)     <= '0';
        p_dina       <= dina;
        p_addra      <= addra;
-       p_douta      <= douta;
-       p_Xn_im      <= xn_im;
-       p_Xn_re      <= xn_re;
+
+       p_Xn_im      <= aux_xn_im;
+       p_Xn_re      <= aux_xn_re;
+		 p_Xn_im_RAM <= xn_im_RAM;
+       p_Xn_re_RAM <= xn_re_RAM;
        p_TX         <= '0';
        p_dir_interleaver <= dir_interleaver_aux;
        p_phase      <= phase;
@@ -186,15 +190,16 @@ begin
   end if;
 
    when Agrupar   =>------------AGRUPAR-------------------------
-   if(dir_interleaver_aux = 96*Nbpc) then --Obtenemos los 96 bits
-
+   if(dir_interleaver_aux = 96*Nbpc-1) then --Obtenemos los 96 bits
+    if(RFS='1') then
            p_group_cont <= 0;
            p_estado     <= Transmite;
-           p_addra      <="00000000";
+           p_addra      <= "0000000";
            p_dir_interleaver <= (others => '0');
+    end if;
    else
 
-     p_simbolo(2-p_group_cont)<=Entrada;  -- as lo escribimos desde el ms significativo al menos significativo
+     p_simbolo(2-p_group_cont)<=Entrada;  -- as lo escribimos desde el mas significativo al menos significativo
      p_group_cont<=group_cont+1;
      p_dir_interleaver <= dir_interleaver_aux + '1';
 
@@ -217,7 +222,7 @@ begin
            if (simbolo (2) = '1') then -- si estamos usando una BPSK y hemos escrito un 1
              p_Abk <= "100"; -- el simbolo equivalente a '1' en la 8PSK es '110', que se encuentra en la direccion 4 de la ROM
 
-           elsif (simbolo(2) = '1') then -- en ese caso seria un 0
+           elsif (simbolo(2) = '0') then -- en ese caso seria un 0
              p_Abk<= "000"; -- el simbolo equivalente a '0' en la 8PSK es '000' y se encuentra en la diireccion 0 de la ROM
 
            end if;
@@ -275,42 +280,42 @@ begin
           p_estado <= Calcula_datos;
 
 
-    when Calcula_datos =>
+    when Calcula_datos =>--------------CALCULA_DATOS----------------------------
 
        case( phase ) is
 
          when "000" =>
-            p_xn_im<="00000000";-- 0
-            p_xn_re<="01100100";-- 100
+            p_xn_im_RAM<="00000000";-- 0
+            p_xn_re_RAM<="01100100";-- 100
 
          when "001" =>
-            p_xn_im<="01000110";-- 70
-            p_xn_re<="01000110";-- 70
+            p_xn_im_RAM<="01000110";-- 70
+            p_xn_re_RAM<="01000110";-- 70
 
          when "010" =>
-            p_xn_im<="01100100";-- 100
-            p_xn_re<="00000000";-- 0
+            p_xn_im_RAM<="01100100";-- 100
+            p_xn_re_RAM<="00000000";-- 0
 
          when "011" =>
-            p_xn_im<="01000110";--  70
-            p_xn_re<="10111010";-- -70
+            p_xn_im_RAM<="01000110";--  70
+            p_xn_re_RAM<="10111010";-- -70
 
          when "100" =>
-            p_xn_im<="00000000";--     0
-            p_xn_re<="10011100";--  -100
+            p_xn_im_RAM<="00000000";--     0
+            p_xn_re_RAM<="10011100";--  -100
 
 
          when "101" =>
-            p_xn_im<="10111010";--  -70
-            p_xn_re<="10111010";--  -70
+            p_xn_im_RAM<="10111010";--  -70
+            p_xn_re_RAM<="10111010";--  -70
 
          when "110" =>
-            p_xn_im<="10011100";-- -100
-            p_xn_re<="00000000";--    0
+            p_xn_im_RAM<="10011100";-- -100
+            p_xn_re_RAM<="00000000";--    0
 
          when others =>
-            p_xn_im<="10111010";-- -70
-            p_xn_re<="01000110";--  70
+            p_xn_im_RAM<="10111010";-- -70
+            p_xn_re_RAM<="01000110";--  70
 
 
        end case;
@@ -318,26 +323,25 @@ begin
       p_phase_ant<=phase;
       p_estado <= escribe_RAM;
 
-    when escribe_RAM =>
-
-      p_wea   <='1';
-      p_dina  <= xn_re & xn_im; -- concatenacion
+  when escribe_RAM =>------------------ESCRIBE_RAM------------------------------
+      p_wea(0)   <='1';
+      p_dina  <= xn_re_RAM & xn_im_RAM; -- concatenacion
       p_addra <= addra + '1';
       p_estado <= reposo;
 
 
-    when Transmite =>
-    if(RFS=1) then
+    when Transmite =>------------------TRANSMITE--------------------------------
+
       P_TX<='1';
       p_xn_re <= douta (15 downto 8);
       p_xn_im <= douta (7 downto 0);
       p_addra <= addra +'1';
-    if (addra = (others => '1')) then
-      p_addra <= "001111";
+    if (addra = "1111111") then
+      p_addra <= "0001111";
       p_estado <= reposo;
-    end if;
 
-  end if;
+
+    end if;
 
 
   end case;

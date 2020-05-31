@@ -1,4 +1,0 @@
-xst -intstyle ise -ifn "/home/ise/SEC/TRANSMISOR_OFDM/interleaver.xst" -ofn "/home/ise/SEC/TRANSMISOR_OFDM/interleaver.syr" 
-vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhi -module interleaver -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work ipcore_dir/RAM_INTERLEAVER.vhd -lib work interleaver.vhdl 
-vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhi -module interleaver -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work ipcore_dir/RAM_INTERLEAVER.vhd -lib work interleaver.vhdl 
-vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhi -module interleaver -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work ipcore_dir/RAM_INTERLEAVER.vhd -lib work interleaver.vhdl 

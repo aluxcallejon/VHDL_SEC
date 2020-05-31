@@ -63,6 +63,8 @@ architecture fec_arq of fec is
   --signal p_salida:STD_LOGIC;
   signal p_dout_val: STD_LOGIC;
   signal p_o1, p_o2, o1_aux, o2_aux: STD_LOGIC;
+  signal contador,p_contador: unsigned (9 downto 0);
+  
 
 -------------------------------------------------------------------------------
 
@@ -83,6 +85,7 @@ o2 <= o2_aux;
       o1_aux       <= '0';
       o2_aux       <= '0';
       dout_val <= '0';
+		contador<=(others => '0');
 
     elsif (clk'event and clk = '1') then
       registro <= p_registro;
@@ -92,6 +95,7 @@ o2 <= o2_aux;
       o2_aux   <= p_o2;
       --salida   <= p_salida;
       dout_val <= p_dout_val;
+		contador<=p_contador;
 
     end if;
 
@@ -100,7 +104,7 @@ o2 <= o2_aux;
 
 ---------PROCESO COMBINACIONAL: MAQUINA DE ESTADOS-----------------------------
 
-  fsm : process(registro, estado, o1_aux, o2_aux,data,fin_tx,data_valido)
+  fsm : process(registro, estado, o1_aux, o2_aux,data,fin_tx,data_valido,contador)
   begin
 
 ---------POR DEFECTO---------
@@ -111,6 +115,7 @@ o2 <= o2_aux;
     p_registro <= registro;
     --p_cuenta <= cuenta;
     p_dout_val <= '0';
+	 p_contador<=contador;
 
 -----------------------------
 
@@ -129,7 +134,7 @@ o2 <= o2_aux;
           p_estado <= tx;
 
       when tx =>-----------------------TRANSMISION-------------------
-
+			 p_contador<=contador+1;	
           p_o1 <= registro(0) xor registro (1) xor registro (3) xor registro (5) xor registro (6);
           p_o2 <= registro(0) xor registro (3) xor registro (2) xor registro (6);
           p_dout_val <= '1';

@@ -58,13 +58,14 @@ architecture PPDU_ARQ of PPDU is
    type estados is (reposo,reset_ceros,cuenta_ceros,TX_ceros_rellena,TX_ceros_decide,TX);
    signal estado, p_estado: estados;
 	 signal flag,p_flag			  :STD_LOGIC := '0';
+	 signal contador,p_contador: unsigned (9 downto 0);
 
 
 ---------COMPONENTES--------------------------------------------------------------
 
 -------------------ROM------------------------------
 
-	COMPONENT ROM
+	COMPONENT ROM1
 	PORT (
 		clka 	: IN  STD_LOGIC;
 		addra : IN  STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -91,7 +92,7 @@ begin
 ---------INSTANCIACIONES----------------------------------------------------------
 
 -------------------ROM------------------------------
-  ROM1 : ROM
+  ROM : ROM1
   PORT MAP (
     clka  => clk,
     addra => cuenta_direccion,
@@ -130,11 +131,11 @@ tx_sinc : process(clk,reset,modulacion)
       fin_tx    	<= '0';
       estado      <= reposo;
 		flag          <= '0'; 		--Sirve para ver si hemos llegado al final de la transmision
-
+		contador<=(others=>'0');
 		case modulacion is
-			when "00"	=>   n_ceros <= 47;
-			when "01"	=>   n_ceros <= 95;
-			when "11"	=>   n_ceros <= 143;
+			when "00"	=>   n_ceros <= 48;
+			when "01"	=>   n_ceros <= 96;
+			when "11"	=>   n_ceros <= 144;
 			when others => n_ceros <= 0;
 		end case;
 
@@ -147,12 +148,13 @@ tx_sinc : process(clk,reset,modulacion)
       n_ceros   	<= p_n_ceros;
       estado      <= p_estado;
 		  flag        <= p_flag;
+		  contador<=p_contador;
 	 end if;
 end process;
 
 ---------MAQUINA DE ESTADOS----------------------
 
-fsm : process(estado,n_ceros,cuenta,sat,douta,flag,data_aux, addra, modulacion)
+fsm : process(estado,n_ceros,cuenta,sat,douta,flag,data_aux, addra, modulacion,contador)
 begin
 
   p_estado    <= estado;
@@ -163,6 +165,7 @@ begin
   p_n_ceros   <= n_ceros;
   p_addra     <= addra;
   p_flag 	    <= flag;
+  p_contador<=contador;
 
 
 case( estado ) is
@@ -202,7 +205,7 @@ when  cuenta_ceros=>-------------------CUENTA_CEROS--------------
     p_estado <= TX;
 
   when  TX=>-------------------TX------------------
-
+	 p_contador<=contador+1;
     p_dat_valid <= '1';
     p_estado <= reposo;
 
@@ -236,8 +239,8 @@ when TX_ceros_rellena =>-------------------TX_CEROS--------------
 if(n_ceros/=0 and sat = '1')then
   p_n_ceros <= n_ceros - 1; -- Decremento en uno
   p_dat_valid <= '1';      -- El siguiente data es valido, aunque sea un cero
-  p_data <= '0';            -- transmitimos los ceros necesarios
-
+  p_data <= '0';  -- transmitimos los ceros necesarios
+p_contador<=contador+1;
 elsif (sat = '1') then      -- siempre entramos cuando sat = 1
 
   p_flag<='1';         -- levantamos la bandera para que se sepa que se ha llegado al fin de tx

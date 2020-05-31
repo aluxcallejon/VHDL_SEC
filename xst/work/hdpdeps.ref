@@ -1,65 +1,85 @@
-V3 39
+V3 52
 FL /home/ise/SEC/TRANSMISOR_OFDM/div_frec.vhd 2020/05/08.12:24:53 P.20131013
-EN work/div_frec 1590857668 FL /home/ise/SEC/TRANSMISOR_OFDM/div_frec.vhd \
+EN work/div_frec 1590889749 FL /home/ise/SEC/TRANSMISOR_OFDM/div_frec.vhd \
       PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
-AR work/div_frec/div_frec_arq 1590857669 \
-      FL /home/ise/SEC/TRANSMISOR_OFDM/div_frec.vhd EN work/div_frec 1590857668
-FL /home/ise/SEC/TRANSMISOR_OFDM/fec.vhdl 2020/05/30.17:29:23 P.20131013
-EN work/fec 1590857672 FL /home/ise/SEC/TRANSMISOR_OFDM/fec.vhdl \
+AR work/div_frec/div_frec_arq 1590889750 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/div_frec.vhd EN work/div_frec 1590889749
+FL /home/ise/SEC/TRANSMISOR_OFDM/fec.vhdl 2020/05/31.17:00:25 P.20131013
+EN work/fec 1590889753 FL /home/ise/SEC/TRANSMISOR_OFDM/fec.vhdl \
       PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181 \
       PB ieee/STD_LOGIC_UNSIGNED 1381692179
-AR work/fec/fec_arq 1590857673 \
-      FL /home/ise/SEC/TRANSMISOR_OFDM/fec.vhdl EN work/fec 1590857672
-FL /home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhdl 2020/05/30.20:52:45 P.20131013
-EN work/interleaver 1590857682 FL /home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhdl \
+AR work/fec/fec_arq 1590889754 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/fec.vhdl EN work/fec 1590889753
+FL /home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhdl 2020/05/31.14:00:38 P.20131013
+EN work/interleaver 1590889765 FL /home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhdl \
       PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181 \
       PB ieee/STD_LOGIC_UNSIGNED 1381692179
-AR work/interleaver/arch 1590857683 \
-      FL /home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhdl EN work/interleaver 1590857682 \
+AR work/interleaver/arch 1590889766 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/interleaver.vhdl EN work/interleaver 1590889765 \
       CP RAM_INTERLEAVER
 FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_INTERLEAVER.vhd 2020/05/17.14:14:21 P.20131013
-EN work/RAM_INTERLEAVER 1590857674 \
+EN work/RAM_INTERLEAVER 1590889755 \
       FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_INTERLEAVER.vhd \
       PB ieee/std_logic_1164 1381692176
-AR work/RAM_INTERLEAVER/RAM_INTERLEAVER_a 1590857675 \
+AR work/RAM_INTERLEAVER/RAM_INTERLEAVER_a 1590889756 \
       FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_INTERLEAVER.vhd \
-      EN work/RAM_INTERLEAVER 1590857674
-FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/ROM.vhd 2020/05/08.14:02:22 P.20131013
-EN work/ROM 1590857666 FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/ROM.vhd \
+      EN work/RAM_INTERLEAVER 1590889755
+FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_mapper.vhd 2020/05/31.18:30:59 P.20131013
+EN work/RAM_mapper 1590889761 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_mapper.vhd \
       PB ieee/std_logic_1164 1381692176
-AR work/ROM/ROM_a 1590857667 \
-      FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/ROM.vhd EN work/ROM 1590857666
-FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU.vhd 2020/05/30.17:51:56 P.20131013
-EN work/PPDU 1590857670 FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU.vhd \
+AR work/RAM_mapper/RAM_mapper_a 1590889762 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_mapper.vhd \
+      EN work/RAM_mapper 1590889761
+FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/ROM1.vhd 2020/05/31.16:28:44 P.20131013
+EN work/ROM1 1590889747 FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/ROM1.vhd \
+      PB ieee/std_logic_1164 1381692176
+AR work/ROM1/ROM1_a 1590889748 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/ROM1.vhd EN work/ROM1 1590889747
+FL /home/ise/SEC/TRANSMISOR_OFDM/mapper.vhdl 2020/05/31.18:56:56 P.20131013
+EN work/mapper 1590889769 FL /home/ise/SEC/TRANSMISOR_OFDM/mapper.vhdl \
       PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181 \
       PB ieee/STD_LOGIC_UNSIGNED 1381692179
-AR work/PPDU/PPDU_ARQ 1590857671 \
-      FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU.vhd EN work/PPDU 1590857670 CP ROM \
+AR work/mapper/arch 1590889770 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/mapper.vhdl EN work/mapper 1590889769 \
+      CP RAM_mapper
+FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU.vhd 2020/05/31.16:30:19 P.20131013
+EN work/PPDU 1590889751 FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/PPDU/PPDU_ARQ 1590889752 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU.vhd EN work/PPDU 1590889751 CP ROM1 \
       CP div_frec
 FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU_FEC.vhd 2020/05/17.12:53:59 P.20131013
-EN work/PPDU_fec 1590857676 FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU_FEC.vhd \
+EN work/PPDU_fec 1590889757 FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU_FEC.vhd \
       PB ieee/std_logic_1164 1381692176
-AR work/PPDU_fec/PPDU_fec_arq 1590857677 \
-      FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU_FEC.vhd EN work/PPDU_fec 1590857676 \
+AR work/PPDU_fec/PPDU_fec_arq 1590889758 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU_FEC.vhd EN work/PPDU_fec 1590889757 \
       CP PPDU CP fec
 FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU_fec_scrambler.vhd 2020/05/17.13:00:08 P.20131013
-EN work/PPDU_fec_scrambler 1590857680 \
+EN work/PPDU_fec_scrambler 1590889763 \
       FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU_fec_scrambler.vhd \
       PB ieee/std_logic_1164 1381692176
-AR work/PPDU_fec_scrambler/PPDU_fec_scrambler_arq 1590857681 \
+AR work/PPDU_fec_scrambler/PPDU_fec_scrambler_arq 1590889764 \
       FL /home/ise/SEC/TRANSMISOR_OFDM/PPDU_fec_scrambler.vhd \
-      EN work/PPDU_fec_scrambler 1590857680 CP PPDU_fec CP scrambler
+      EN work/PPDU_fec_scrambler 1590889763 CP PPDU_fec CP scrambler
 FL /home/ise/SEC/TRANSMISOR_OFDM/ppd_fec_scrambler_interleaver.vhd 2020/05/30.20:54:20 P.20131013
-EN work/ppd_fec_scrambler_interleaver 1590857684 \
+EN work/ppd_fec_scrambler_interleaver 1590889767 \
       FL /home/ise/SEC/TRANSMISOR_OFDM/ppd_fec_scrambler_interleaver.vhd \
       PB ieee/std_logic_1164 1381692176
-AR work/ppd_fec_scrambler_interleaver/Behavioral 1590857685 \
+AR work/ppd_fec_scrambler_interleaver/Behavioral 1590889768 \
       FL /home/ise/SEC/TRANSMISOR_OFDM/ppd_fec_scrambler_interleaver.vhd \
-      EN work/ppd_fec_scrambler_interleaver 1590857684 CP PPDU_fec_scrambler \
+      EN work/ppd_fec_scrambler_interleaver 1590889767 CP PPDU_fec_scrambler \
       CP interleaver
-FL /home/ise/SEC/TRANSMISOR_OFDM/scrambler.vhdl 2020/05/30.18:00:30 P.20131013
-EN work/scrambler 1590857678 FL /home/ise/SEC/TRANSMISOR_OFDM/scrambler.vhdl \
+FL /home/ise/SEC/TRANSMISOR_OFDM/scrambler.vhdl 2020/05/31.17:34:33 P.20131013
+EN work/scrambler 1590889759 FL /home/ise/SEC/TRANSMISOR_OFDM/scrambler.vhdl \
       PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181 \
       PB ieee/STD_LOGIC_UNSIGNED 1381692179
-AR work/scrambler/arch 1590857679 \
-      FL /home/ise/SEC/TRANSMISOR_OFDM/scrambler.vhdl EN work/scrambler 1590857678
+AR work/scrambler/arch 1590889760 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/scrambler.vhdl EN work/scrambler 1590889759
+FL /home/ise/SEC/TRANSMISOR_OFDM/Transmisor.vhd 2020/05/31.18:43:30 P.20131013
+EN work/Transmisor 1590886115 FL /home/ise/SEC/TRANSMISOR_OFDM/Transmisor.vhd \
+      PB ieee/std_logic_1164 1381692176
+AR work/Transmisor/arquitectura 1590886116 \
+      FL /home/ise/SEC/TRANSMISOR_OFDM/Transmisor.vhd EN work/Transmisor 1590886115 \
+      CP ppd_fec_scrambler_interleaver CP mapper CP IFFT

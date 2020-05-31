@@ -1,2 +1,2 @@
-work	"interleaver.vhdl"
-work	"ipcore_dir/RAM_INTERLEAVER.vhd"
+work	"ipcore_dir/RAM_mapper.vhd"
+work	"mapper.vhdl"

@@ -1,0 +1,475 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> 
+Reading design: mapper.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "mapper.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "mapper"
+Output Format                      : NGC
+Target Device                      : xc3s100e-5-cp132
+
+---- Source Options
+Top Module Name                    : mapper
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+---- Other Options
+Cores Search Directories           : {"ipcore_dir"  }
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_mapper.vhd" in Library work.
+WARNING:HDLParsers:3530 - Time stamp of file "/home/ise/SEC/TRANSMISOR_OFDM/ipcore_dir/RAM_mapper.vhd" is newer than current system time.
+Architecture ram_mapper_a of Entity ram_mapper is up to date.
+Compiling vhdl file "/home/ise/SEC/TRANSMISOR_OFDM/mapper.vhdl" in Library work.
+WARNING:HDLParsers:3530 - Time stamp of file "/home/ise/SEC/TRANSMISOR_OFDM/mapper.vhdl" is newer than current system time.
+Entity <mapper> compiled.
+Entity <mapper> (Architecture <arch>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <mapper> in library <work> (architecture <arch>) with generics.
+	Nbpc = 3
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing generic Entity <mapper> in library <work> (Architecture <arch>).
+	Nbpc = 3
+WARNING:Xst:2211 - "/home/ise/SEC/TRANSMISOR_OFDM/mapper.vhdl" line 102: Instantiating black box module <RAM_mapper>.
+Entity <mapper> analyzed. Unit <mapper> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <mapper>.
+    Related source file is "/home/ise/SEC/TRANSMISOR_OFDM/mapper.vhdl".
+    Found finite state machine <FSM_0> for signal <estado>.
+    -----------------------------------------------------------------------
+    | States             | 6                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 4                                              |
+    | Outputs            | 7                                              |
+    | Clock              | clk                       (rising_edge)        |
+    | Reset              | reset                     (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | reposo                                         |
+    | Power Up State     | reposo                                         |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 8x3-bit ROM for signal <Abk$mux0000>.
+    Found 1-bit register for signal <TX>.
+    Found 3-bit register for signal <Abk>.
+    Found 7-bit register for signal <addra>.
+    Found 8-bit register for signal <aux_xn_im>.
+    Found 8-bit register for signal <aux_xn_re>.
+    Found 16-bit register for signal <dina>.
+    Found 9-bit up counter for signal <dir_interleaver_aux>.
+    Found 2-bit register for signal <group_cont>.
+    Found 7-bit adder for signal <p_addra$share0000> created at line 184.
+    Found 2-bit adder for signal <p_group_cont$addsub0000> created at line 203.
+    Found 3-bit register for signal <phase>.
+    Found 3-bit adder for signal <phase$add0000> created at line 279.
+    Found 3-bit register for signal <phase_ant>.
+    Found 3-bit register for signal <simbolo>.
+    Found 1-bit register for signal <wea<0>>.
+    Found 8-bit register for signal <xn_im_RAM>.
+    Found 8-bit register for signal <xn_re_RAM>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   1 ROM(s).
+	inferred   1 Counter(s).
+	inferred  58 D-type flip-flop(s).
+	inferred   3 Adder/Subtractor(s).
+Unit <mapper> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# ROMs                                                 : 1
+ 8x3-bit ROM                                           : 1
+# Adders/Subtractors                                   : 3
+ 2-bit adder                                           : 1
+ 3-bit adder                                           : 1
+ 7-bit adder                                           : 1
+# Counters                                             : 1
+ 9-bit up counter                                      : 1
+# Registers                                            : 13
+ 1-bit register                                        : 2
+ 16-bit register                                       : 1
+ 2-bit register                                        : 1
+ 3-bit register                                        : 4
+ 7-bit register                                        : 1
+ 8-bit register                                        : 4
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <estado/FSM> on signal <estado[1:6]> with one-hot encoding.
+---------------------------
+ State         | Encoding
+---------------------------
+ reposo        | 000001
+ agrupar       | 000010
+ calcula_symb  | 001000
+ calcula_datos | 010000
+ escribe_ram   | 100000
+ transmite     | 000100
+---------------------------
+Reading core <ipcore_dir/RAM_mapper.ngc>.
+Loading core <RAM_mapper> for timing and area information for instance <ROM>.
+WARNING:Xst:1710 - FF/Latch <xn_re_RAM_0> (without init value) has a constant value of 0 in block <mapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <xn_im_RAM_0> (without init value) has a constant value of 0 in block <mapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <dina_0> (without init value) has a constant value of 0 in block <mapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <dina_8> (without init value) has a constant value of 0 in block <mapper>. This FF/Latch will be trimmed during the optimization process.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 1
+# ROMs                                                 : 1
+ 8x3-bit ROM                                           : 1
+# Adders/Subtractors                                   : 3
+ 2-bit adder                                           : 1
+ 3-bit adder                                           : 1
+ 7-bit adder                                           : 1
+# Counters                                             : 1
+ 9-bit up counter                                      : 1
+# Registers                                            : 71
+ Flip-Flops                                            : 71
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1710 - FF/Latch <xn_re_RAM_0> (without init value) has a constant value of 0 in block <mapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <xn_im_RAM_0> (without init value) has a constant value of 0 in block <mapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <dina_0> (without init value) has a constant value of 0 in block <mapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <dina_8> (without init value) has a constant value of 0 in block <mapper>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <xn_im_RAM_3> in Unit <mapper> is equivalent to the following 2 FFs/Latches, which will be removed : <xn_im_RAM_4> <xn_im_RAM_7> 
+INFO:Xst:2261 - The FF/Latch <xn_re_RAM_3> in Unit <mapper> is equivalent to the following 2 FFs/Latches, which will be removed : <xn_re_RAM_4> <xn_re_RAM_7> 
+INFO:Xst:2261 - The FF/Latch <dina_11> in Unit <mapper> is equivalent to the following 2 FFs/Latches, which will be removed : <dina_12> <dina_15> 
+INFO:Xst:2261 - The FF/Latch <dina_3> in Unit <mapper> is equivalent to the following 2 FFs/Latches, which will be removed : <dina_4> <dina_7> 
+
+Optimizing unit <mapper> ...
+INFO:Xst:2261 - The FF/Latch <xn_re_RAM_1> in Unit <mapper> is equivalent to the following 2 FFs/Latches, which will be removed : <xn_im_RAM_1> <phase_ant_0> 
+INFO:Xst:2261 - The FF/Latch <dina_1> in Unit <mapper> is equivalent to the following FF/Latch, which will be removed : <dina_9> 
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block mapper, actual ratio is 6.
+FlipFlop estado_FSM_FFd2 has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 72
+ Flip-Flops                                            : 72
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : mapper.ngr
+Top Level Output File Name         : mapper
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 31
+
+Cell Usage :
+# BELS                             : 132
+#      GND                         : 2
+#      INV                         : 1
+#      LUT1                        : 8
+#      LUT2                        : 14
+#      LUT2_D                      : 3
+#      LUT2_L                      : 1
+#      LUT3                        : 21
+#      LUT3_L                      : 2
+#      LUT4                        : 41
+#      LUT4_D                      : 4
+#      LUT4_L                      : 10
+#      MUXCY                       : 8
+#      MUXF5                       : 6
+#      VCC                         : 2
+#      XORCY                       : 9
+# FlipFlops/Latches                : 72
+#      FDC                         : 16
+#      FDCE                        : 49
+#      FDP                         : 5
+#      FDPE                        : 2
+# RAMS                             : 1
+#      RAMB16_S36_S36              : 1
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 30
+#      IBUF                        : 4
+#      OBUF                        : 26
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s100ecp132-5 
+
+ Number of Slices:                       68  out of    960     7%  
+ Number of Slice Flip Flops:             72  out of   1920     3%  
+ Number of 4 input LUTs:                105  out of   1920     5%  
+ Number of IOs:                          31
+ Number of bonded IOBs:                  31  out of     83    37%  
+ Number of BRAMs:                         1  out of      4    25%  
+ Number of GCLKs:                         1  out of     24     4%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clk                                | BUFGP                  | 73    |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+-----------------------------------+------------------------+-------+
+Control Signal                     | Buffer(FF name)        | Load  |
+-----------------------------------+------------------------+-------+
+reset                              | IBUF                   | 72    |
+-----------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -5
+
+   Minimum period: 5.722ns (Maximum Frequency: 174.765MHz)
+   Minimum input arrival time before clock: 4.672ns
+   Maximum output required time after clock: 4.134ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 5.722ns (frequency: 174.765MHz)
+  Total number of paths / destination ports: 881 / 153
+-------------------------------------------------------------------------
+Delay:               5.722ns (Levels of Logic = 4)
+  Source:            dir_interleaver_aux_2 (FF)
+  Destination:       addra_4 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: dir_interleaver_aux_2 to addra_4
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             3   0.514   0.603  dir_interleaver_aux_2 (dir_interleaver_aux_2)
+     LUT3:I0->O            1   0.612   0.360  estado_cmp_eq000015 (estado_cmp_eq000015)
+     LUT4:I3->O           26   0.612   1.074  estado_cmp_eq000023 (estado_cmp_eq0000)
+     LUT4_D:I3->O          3   0.612   0.454  p_addra<0>1 (N01)
+     LUT4:I3->O            1   0.612   0.000  p_addra<4>1 (p_addra<4>)
+     FDC:D                     0.268          addra_4
+    ----------------------------------------
+    Total                      5.722ns (3.230ns logic, 2.492ns route)
+                                       (56.4% logic, 43.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 28 / 24
+-------------------------------------------------------------------------
+Offset:              4.672ns (Levels of Logic = 4)
+  Source:            RFS (PAD)
+  Destination:       addra_2 (FF)
+  Destination Clock: clk rising
+
+  Data Path: RFS to addra_2
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            11   1.106   0.945  RFS_IBUF (RFS_IBUF)
+     LUT3:I0->O            1   0.612   0.387  p_addra<0>1_SW2 (N45)
+     LUT4_L:I2->LO         1   0.612   0.130  p_addra<2>_SW0 (N9)
+     LUT4:I2->O            1   0.612   0.000  p_addra<2> (p_addra<2>)
+     FDP:D                     0.268          addra_2
+    ----------------------------------------
+    Total                      4.672ns (3.210ns logic, 1.462ns route)
+                                       (68.7% logic, 31.3% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 26 / 26
+-------------------------------------------------------------------------
+Offset:              4.134ns (Levels of Logic = 1)
+  Source:            dir_interleaver_aux_8 (FF)
+  Destination:       dir_interleaver<8> (PAD)
+  Source Clock:      clk rising
+
+  Data Path: dir_interleaver_aux_8 to dir_interleaver<8>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             3   0.514   0.451  dir_interleaver_aux_8 (dir_interleaver_aux_8)
+     OBUF:I->O                 3.169          dir_interleaver_8_OBUF (dir_interleaver<8>)
+    ----------------------------------------
+    Total                      4.134ns (3.683ns logic, 0.451ns route)
+                                       (89.1% logic, 10.9% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 22.00 secs
+Total CPU time to Xst completion: 21.35 secs
+ 
+--> 
+
+
+Total memory usage is 621348 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   11 (   0 filtered)
+Number of infos    :    7 (   0 filtered)
+
