@@ -107,7 +107,7 @@ begin
 
   DIV : div_frec
   GENERIC MAP(
-  MAX_CUENTA => 20
+  MAX_CUENTA => 100
   )
   PORT MAP (
     clk   => clk,

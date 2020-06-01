@@ -68,7 +68,6 @@ ARCHITECTURE behavior OF tb_interleaver IS
  	--Outputs
    signal ready : std_logic;
    signal dout : std_logic_vector(0 downto 0);
-	signal dir_que_escribo: std_logic_vector(8 downto 0);
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -82,8 +81,7 @@ BEGIN
           modulacion => modulacion,
           addrb => addrb,
           ready => ready,
-          dout => dout,
-			 dir_que_escribo => dir_que_escribo
+          dout => dout
         );
 
    -- Clock process definitions
@@ -95,44 +93,44 @@ BEGIN
 		wait for clk_period/2;
    end process;
 	
-	escribe_indice: process
-	
-		variable linea: line;
-		variable indice_integer: integer;
-		variable bit_direccion: std_logic_vector (8 downto 0);
-		FILE fout: text open write_mode is "indices.txt"; -- el fichero donde escribamos los indices sera indices.txt
-		variable cuenta_bucle: integer;
-		
-	begin
-	
-		case modulacion is 
-		
-			when "00" => cuenta_bucle:= 96;
-			when "01" => cuenta_bucle := 192;
-			when others => cuenta_bucle := 288;
-			
-		end case;
-	
-		wait until reset = '0';
-		
-		for j in 0 to cuenta_bucle loop
-		
-			for i in 0 to 8 loop -- la direccion que leo es de 9 bits
-			
-				bit_direccion (i) := dir_que_escribo (i);
-							
-			end loop;
-		
-			indice_integer := To_integer(Unsigned(bit_direccion));
-			
-			write (linea, indice_integer); -- escribimos el indice integer en linea
-			writeline (fout, linea); --escribimos el indice_integer en el fichero de salida
-			
-			wait until dir_que_escribo'event; -- esperamos a que la seal de direccion cambie para leerla
-		
-		
-		end loop;
-	end process;
+--	escribe_indice: process
+--	
+--		variable linea: line;
+--		variable indice_integer: integer;
+--		variable bit_direccion: std_logic_vector (8 downto 0);
+--		FILE fout: text open write_mode is "indices.txt"; -- el fichero donde escribamos los indices sera indices.txt
+--		variable cuenta_bucle: integer;
+--		
+--	begin
+--	
+--		case modulacion is 
+--		
+--			when "00" => cuenta_bucle:= 96;
+--			when "01" => cuenta_bucle := 192;
+--			when others => cuenta_bucle := 288;
+--			
+--		end case;
+--	
+--		wait until reset = '0';
+--		
+--		for j in 0 to cuenta_bucle loop
+--		
+--			for i in 0 to 8 loop -- la direccion que leo es de 9 bits
+--			
+--				bit_direccion (i) := dir_que_escribo (i);
+--							
+--			end loop;
+--		
+--			indice_integer := To_integer(Unsigned(bit_direccion));
+--			
+--			write (linea, indice_integer); -- escribimos el indice integer en linea
+--			writeline (fout, linea); --escribimos el indice_integer en el fichero de salida
+--			
+--			wait until dir_que_escribo'event; -- esperamos a que la seal de direccion cambie para leerla
+--		
+--		
+--		end loop;
+--	end process;
 	
 	escribe_salida: process
 	

@@ -1,0 +1,1 @@
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/PPDU_fec.vhi -module PPDU_fec -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work ipcore_dir/ROM.vhd -lib work div_frec.vhd -lib work PPDU.vhd -lib work fec.vhdl -lib work PPDU_FEC.vhd 

@@ -1,0 +1,4 @@
+vhdl isim_temp "ipcore_dir/ROM.vhd"
+vhdl isim_temp "div_frec.vhd"
+vhdl isim_temp "PPDU.vhd"
+vhdl isim_temp "tb_PPDU.vhd"

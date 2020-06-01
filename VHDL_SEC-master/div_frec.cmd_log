@@ -1,0 +1,6 @@
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhi -module div_frec -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work div_frec.vhd 
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhi -module div_frec -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work div_frec.vhd -lib work div_frec_25.vhd 
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhi -module div_frec -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work div_frec.vhd -lib work div_frec_25.vhd 
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhi -module div_frec -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work div_frec.vhd -lib work div_frec_25.vhd 
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhi -module div_frec -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work div_frec.vhd -lib work div_frec_25.vhd 
+vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/div_frec.vhi -module div_frec -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work div_frec.vhd 
