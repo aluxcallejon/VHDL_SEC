@@ -45,8 +45,6 @@ architecture div_frec_arq of div_frec is
 
 signal cuenta, p_cuenta: unsigned (15 downto 0);
 signal p_sat: STD_LOGIC;
---constant MAX_CUENTA: integer := 50000;
---constant MAX_CUENTA_TEST: integer := 4096;
 
 ----------------------------------------------------------------------------------
 
@@ -71,17 +69,15 @@ comb: process(cuenta)
 	begin
 			if(cuenta = MAX_CUENTA) then
 				p_cuenta <= (others =>'0');
-				p_sat <= '1';
+				p_sat 	<= '1';
 			else
 				p_cuenta <= cuenta + 1;
-				p_sat <= '0';
+				p_sat 	<= '0';
 			end if;
 			
 ----------------------------------------------------------------------------------
 		
 end process;
-
-
 
 end div_frec_arq;
 

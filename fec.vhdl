@@ -45,14 +45,6 @@ entity fec is
   );
 end entity;
 
-
-
--- duplica la entrada. Por cada bit de entrada salen dos.
--- registro de desplazamiento de 7 bits
-
-
-
-
 architecture fec_arq of fec is
 
 --------SIGNALS----------------------------------------------------------------
@@ -60,7 +52,6 @@ architecture fec_arq of fec is
   signal registro, p_registro: std_logic_vector (6 downto 0);
   type estados is (reposo, desplaza, tx);
   signal estado, p_estado: estados;
-  --signal p_salida:STD_LOGIC;
   signal p_dout_val: STD_LOGIC;
   signal p_o1, p_o2, o1_aux, o2_aux: STD_LOGIC;
   signal contador,p_contador: unsigned (9 downto 0);
@@ -70,8 +61,8 @@ architecture fec_arq of fec is
 
 begin
 
-o1	<=	o1_aux;	--Asignacion en paralelo auxiliar
-o2 <= o2_aux;
+	o1	<=	o1_aux;	--Asignacion en paralelo auxiliar
+	o2 <= o2_aux;
 
 ---------PROCESO SINCRONO------------------------------------------------------
 
@@ -79,49 +70,45 @@ o2 <= o2_aux;
   begin
 
     if (reset = '1') then
-      estado   <= reposo;
-      registro <=(others => '0');
-     -- cuenta   <= 0;
-      o1_aux       <= '0';
-      o2_aux       <= '0';
-      dout_val <= '0';
-		contador<=(others => '0');
+      estado   	<= reposo;
+      registro 	<= (others => '0');
+      o1_aux      <= '0';
+      o2_aux      <= '0';
+      dout_val 	<= '0';
+		contador		<= (others => '0');
 
     elsif (clk'event and clk = '1') then
       registro <= p_registro;
       estado   <= p_estado;
-     -- cuenta   <= p_cuenta;
       o1_aux   <= p_o1;
       o2_aux   <= p_o2;
-      --salida   <= p_salida;
       dout_val <= p_dout_val;
-		contador<=p_contador;
+		contador	<= p_contador;
 
     end if;
 
 
   end process;
 
----------PROCESO COMBINACIONAL: MAQUINA DE ESTADOS-----------------------------
+---------PROCESO COMBINACIONAL: MAQUINA DE ESTADOS--------------------------------
 
   fsm : process(registro, estado, o1_aux, o2_aux,data,fin_tx,data_valido,contador)
   begin
 
 ---------POR DEFECTO---------
 
-    p_estado <= estado;
-    p_o1 <= o1_aux;
-    p_o2 <= o2_aux;
+    p_estado 	<= estado;
+    p_o1 		<= o1_aux;
+    p_o2 		<= o2_aux;
     p_registro <= registro;
-    --p_cuenta <= cuenta;
     p_dout_val <= '0';
-	 p_contador<=contador;
+	 p_contador	<= contador;
 
 -----------------------------
 
     case( estado ) is
 
-      when reposo =>-------------------REPOSO--------------
+      when reposo =>-------------------REPOSO------------------------
 
         if (data_valido = '1' and fin_tx = '0') then
           p_estado <= desplaza;
@@ -131,14 +118,14 @@ o2 <= o2_aux;
       when desplaza =>-----------------DESPLAZA----------------------
 
           p_registro <= data & registro (6 downto 1);
-          p_estado <= tx;
+          p_estado 	<= tx;
 
       when tx =>-----------------------TRANSMISION-------------------
-			 p_contador<=contador+1;	
-          p_o1 <= registro(0) xor registro (1) xor registro (3) xor registro (5) xor registro (6);
-          p_o2 <= registro(0) xor registro (3) xor registro (2) xor registro (6);
+			 p_contador	<= contador+1;	
+          p_o1 		<= registro(0) xor registro (1) xor registro (3) xor registro (5) xor registro (6);
+          p_o2 		<= registro(0) xor registro (3) xor registro (2) xor registro (6);
           p_dout_val <= '1';
-          p_estado <= reposo;
+          p_estado 	<= reposo;
 
     end case;
 
