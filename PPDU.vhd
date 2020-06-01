@@ -87,6 +87,10 @@ architecture PPDU_ARQ of PPDU is
 
 ---------END_COMPONENTS-----------------------------------------------------------
 
+
+attribute box_type : string; 
+
+attribute box_type of ROM1 : component is "black_box"; 
 begin
 
 ---------INSTANCIACIONES----------------------------------------------------------

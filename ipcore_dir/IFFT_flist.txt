@@ -5,7 +5,6 @@ IFFT/doc/xfft_v7_1_vinfo.html
 IFFT.asy
 IFFT.gise
 IFFT.ngc
-IFFT.sym
 IFFT.vhd
 IFFT.vho
 IFFT.xco

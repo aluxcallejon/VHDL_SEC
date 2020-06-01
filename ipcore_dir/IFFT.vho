@@ -208,8 +208,6 @@ COMPONENT IFFT
     xn_im : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     fwd_inv : IN STD_LOGIC;
     fwd_inv_we : IN STD_LOGIC;
-    scale_sch : IN STD_LOGIC_VECTOR(13 DOWNTO 0);
-    scale_sch_we : IN STD_LOGIC;
     rfd : OUT STD_LOGIC;
     xn_index : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
     busy : OUT STD_LOGIC;
@@ -218,8 +216,8 @@ COMPONENT IFFT
     dv : OUT STD_LOGIC;
     xk_index : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
     cpv : OUT STD_LOGIC;
-    xk_re : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-    xk_im : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+    xk_re : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+    xk_im : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
   );
 END COMPONENT;
 -- COMP_TAG_END ------ End COMPONENT Declaration ------------
@@ -239,8 +237,6 @@ your_instance_name : IFFT
     xn_im => xn_im,
     fwd_inv => fwd_inv,
     fwd_inv_we => fwd_inv_we,
-    scale_sch => scale_sch,
-    scale_sch_we => scale_sch_we,
     rfd => rfd,
     xn_index => xn_index,
     busy => busy,

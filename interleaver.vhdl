@@ -44,8 +44,8 @@ entity interleaver is
   data_valid:  in  STD_LOGIC;
   addrb:			in  STD_LOGIC_VECTOR(8 downto 0);
   Ready     :  out STD_LOGIC;
-  data_out  :  out std_logic_VECTOR(0 DOWNTO 0);
-  dir_que_escribo: out std_logic_vector (8 DOWNTO 0) -- necesitamos ponerla como salida porque el tb la necesitara para sacarla en un fichero
+  data_out  :  out std_logic_VECTOR(0 DOWNTO 0)
+ -- dir_que_escribo: out std_logic_vector (8 DOWNTO 0) -- necesitamos ponerla como salida porque el tb la necesitara para sacarla en un fichero
   );
 end entity;
 architecture arch of interleaver is
@@ -63,6 +63,10 @@ COMPONENT RAM_INTERLEAVER
   );
 END COMPONENT;
 
+attribute box_type : string; 
+
+attribute box_type of RAM_interleaver : component is "black_box"; 
+
 ---------SIGNALS---------------------------------------------------------------
 
   signal p_ready: STD_LOGIC;
@@ -70,7 +74,7 @@ END COMPONENT;
   signal estado,  p_estado   : status;
   signal cuenta_filas, p_cuenta_filas: integer range 0 to n_filas; 
   signal cuenta_columnas, p_cuenta_columnas: integer range 0 to n_columnas; 
-  signal entrada_ram, p_entrada_ram :STD_LOGIC_VECTOR(0 DOWNTO 0);
+  signal entrada_ram:STD_LOGIC_VECTOR(0 DOWNTO 0);
   signal dir,p_dir :STD_LOGIC_VECTOR(8 DOWNTO 0);
   signal write_enable, p_write_enable: STD_LOGIC_VECTOR (0 downto 0);
 
@@ -82,7 +86,7 @@ END COMPONENT;
 
 begin
 
-	dir_que_escribo <= dir;
+--	dir_que_escribo <= dir;
 	entrada_ram(0)<=data;
 
 MI_Ram_Interleaver : RAM_INTERLEAVER
@@ -113,8 +117,7 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
       Ready <= '0';
 		dir <= (others=> '0');
 		write_enable <= "0";
-		--entrada_ram<="0";
-		-- data_out <= "0";
+		
 		
 		
   elsif (clk'event and clk= '1') then
@@ -122,7 +125,7 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
     estado <= p_estado;
     cuenta_columnas <= p_cuenta_columnas;
     cuenta_filas <= p_cuenta_filas;
-	-- entrada_ram <= p_entrada_ram;
+	
 	 dir <= p_dir;
 	 write_enable <= p_write_enable;
 	end if;
@@ -139,7 +142,6 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
     p_ready <= '0';
     p_cuenta_filas <= cuenta_filas;
     p_cuenta_columnas <= cuenta_columnas;
-	-- p_entrada_ram <= entrada_ram;
 	 p_dir <= dir;
 	 p_write_enable <= "0";
 	  
@@ -155,7 +157,6 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
 		  
 		when Escribe =>-------------ESCRIBE---------------------------
 			
-			--p_entrada_ram(0) <= data;
 			p_write_enable <= "1";
 			p_estado <= Desordena;
 

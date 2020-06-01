@@ -31,17 +31,14 @@ use ieee.std_logic_unsigned.all;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 entity mapper is
-  GENERIC(
-
-  Nbpc: integer := 3
-
-  );
+  
   port (
   clk:     in STD_LOGIC;
   reset:   in STD_LOGIC;
   Entrada: in STD_LOGIC;
   Ready:   in STD_LOGIC;
-  RFS:     in STD_LOGIC;
+  RFD:     in STD_LOGIC;
+  modulacion: in STD_logic_vector(1 downto 0);
   Xn_re:   out std_logic_vector (7 DOWNTO 0);
   Xn_im:   out std_logic_vector (7 DOWNTO 0);
   TX:      out STD_LOGIC; --start del ifft
@@ -57,6 +54,8 @@ architecture arch of mapper is
 
   type status is (Reposo, Agrupar, Calcula_symb, Calcula_datos, escribe_RAM, Transmite);
   signal estado,  p_estado   : status;
+  signal Nbpc: integer range 1 to 3;
+  signal contador_offset,p_contador_offset: unsigned (1 downto 0);
   signal p_xn_im, p_xn_re : std_logic_vector (7 downto 0);
   signal p_xn_im_RAM, p_xn_re_RAM : std_logic_vector (7 downto 0);
   signal xn_im_RAM, xn_re_RAM : std_logic_vector (7 downto 0);
@@ -84,6 +83,7 @@ architecture arch of mapper is
  PORT (
    clka : IN STD_LOGIC;
    wea : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+	rsta: IN STD_logic;
    addra : IN STD_LOGIC_VECTOR(6 DOWNTO 0); -- 128 direcciones que le llegaran a la IFFT
    dina : IN STD_LOGIC_VECTOR(15 DOWNTO 0); -- fase codificada que viene de rom_grande
    douta : OUT STD_LOGIC_VECTOR(15 DOWNTO 0) -- 16 bits que se envian a la IFFT
@@ -91,6 +91,9 @@ architecture arch of mapper is
 END COMPONENT;
 
 
+attribute box_type : string; 
+
+attribute box_type of RAM_mapper : component is "black_box"; 
 -------------------------------------------------------------------------------
 
 begin
@@ -100,8 +103,10 @@ begin
  xn_im<=aux_xn_im;
   ------------- Begin Cut here for INSTANTIATION Template ----- INST_TAG
   ROM : RAM_mapper
+  
     PORT MAP (
       clka => clk,
+		rsta => reset,
       wea => wea,
       addra => addra,
       dina => dina,
@@ -132,6 +137,7 @@ begin
      phase_ant <= "100";
      tx <= '0';
      Abk <= (others => '0');
+	  contador_offset<= (others =>'0');
 
 
    elsif (clk'event and clk = '1') then
@@ -151,6 +157,7 @@ begin
      phase      <= p_phase;
      phase_ant  <= p_phase_ant;
      Abk        <= p_Abk;
+	  contador_offset<=p_contador_offset;
 
 
 
@@ -160,10 +167,10 @@ begin
 
 ---------MAQUINA DE ESTADOS----------------------------------------------------
 
-fsm : process(Ready,douta,dir_interleaver_aux,simbolo,Abk,phase,RFS,group_cont,addra,estado,dina,aux_xn_im,aux_xn_re,xn_im_RAM,xn_re_RAM,phase_ant,Entrada)
+fsm : process(RFD,Ready,douta,dir_interleaver_aux,simbolo,Abk,phase,group_cont,addra,estado,dina,aux_xn_im,aux_xn_re,xn_im_RAM,xn_re_RAM,phase_ant,Entrada,Nbpc,modulacion,contador_offset)
 begin
 
-       p_estado     <= reposo;
+       p_estado     <= estado;
        p_simbolo    <= simbolo; -- que coja los Nbpc ultimos. Es la de referencia
        p_group_cont <= group_cont;
        p_wea(0)     <= '0';
@@ -179,7 +186,14 @@ begin
        p_phase      <= phase;
        p_phase_ant  <= phase_ant;
        p_Abk        <= Abk;
-
+		 p_contador_offset<=contador_offset;
+		 
+	  case modulacion is
+		 when "00" => Nbpc<=1;	 
+		 when "01" => Nbpc<=2;
+		 when others=>Nbpc<=3;
+		end case;
+		
 
    case estado is
 
@@ -191,12 +205,12 @@ begin
 
    when Agrupar   =>------------AGRUPAR-------------------------
    if(dir_interleaver_aux = 96*Nbpc-1) then --Obtenemos los 96 bits
-    if(RFS='1') then
+
            p_group_cont <= 0;
            p_estado     <= Transmite;
            p_addra      <= "0000000";
            p_dir_interleaver <= (others => '0');
-    end if;
+ 
    else
 
      p_simbolo(2-p_group_cont)<=Entrada;  -- as lo escribimos desde el mas significativo al menos significativo
@@ -215,11 +229,10 @@ begin
 
    when Calcula_symb =>------------CALCULA_SYMB-------------------------
 
-   case( Nbpc ) is
+   case(modulacion) is
 
-          when 1 => ---------------MODULACION DBPSK---------------------
-
-           if (simbolo (2) = '1') then -- si estamos usando una BPSK y hemos escrito un 1
+          when "00" => ---------------MODULACION DBPSK---------------------
+				           if (simbolo (2) = '1') then -- si estamos usando una BPSK y hemos escrito un 1
              p_Abk <= "100"; -- el simbolo equivalente a '1' en la 8PSK es '110', que se encuentra en la direccion 4 de la ROM
 
            elsif (simbolo(2) = '0') then -- en ese caso seria un 0
@@ -227,8 +240,8 @@ begin
 
            end if;
 
-         when 2 => ---------------MODULACION DQPSK---------------------
-
+         when "01" => ---------------MODULACION DQPSK---------------------
+				
            if (simbolo (2 downto 1) = "00") then
            p_Abk <= "000"; --el equivalente al simbolo '00' en la 8PSK es '000' que se encuentra en la direccion 0 de la ROM
 
@@ -245,7 +258,7 @@ begin
 
 
           when others => ---------------MODULACION D8PSK---------------------
-
+			 	
           if (simbolo = "000") then
             p_Abk <= "000";
 
@@ -327,23 +340,29 @@ begin
       p_wea(0)   <='1';
       p_dina  <= xn_re_RAM & xn_im_RAM; -- concatenacion
       p_addra <= addra + '1';
-      p_estado <= reposo;
+      p_estado <= agrupar;
 
 
     when Transmite =>------------------TRANSMITE--------------------------------
 
       P_TX<='1';
-      p_xn_re <= douta (15 downto 8);
-      p_xn_im <= douta (7 downto 0);
-      p_addra <= addra +'1';
-    if (addra = "1111111") then
-      p_addra <= "0001111";
-      p_estado <= reposo;
+		if(RFD='1') then
+			if(contador_offset="11") then
+				p_xn_re <= douta (15 downto 8);
+				p_xn_im <= douta (7 downto 0);
+				p_addra <= addra +'1';
+					 if (addra = "1111111") then
+						p_addra <= "0001111";
+						p_estado <= reposo;
+						p_contador_offset<=(others=>'0');
 
 
-    end if;
+					 end if;
+			else
+		   p_contador_offset<=contador_offset+ 1;
 
-
+			end if;
+	end if;
   end case;
 end process;
 

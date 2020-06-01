@@ -35,8 +35,8 @@ entity ppd_fec_scrambler_interleaver is
            modulacion : in  STD_LOGIC_VECTOR (1 downto 0);
 			  addrb: 		in std_logic_vector (8 downto 0);
            ready : out  STD_LOGIC;
-           dout : out  std_logic_vector (0 DOWNTO 0);
-			  dir_que_escribo: out std_logic_vector (8 downto 0)
+           dout : out  std_logic_vector (0 DOWNTO 0)
+		--	  dir_que_escribo: out std_logic_vector (8 downto 0)
 			  );
 end ppd_fec_scrambler_interleaver;
 
@@ -60,8 +60,8 @@ architecture Behavioral of ppd_fec_scrambler_interleaver is
 		data_valid : IN std_logic;
 		addrb : IN std_logic_vector(8 downto 0);          
 		Ready : OUT std_logic;
-		data_out : OUT std_logic_vector(0 downto 0);
-		dir_que_escribo: out std_logic_vector (8 downto 0)
+		data_out : OUT std_logic_vector(0 downto 0)
+	--	dir_que_escribo: out std_logic_vector (8 downto 0)
 		);
 	END COMPONENT;
 	
@@ -85,8 +85,8 @@ Inst_PPDU_fec_scrambler: PPDU_fec_scrambler PORT MAP(
 		data_valid => data_valido_scrambler,
 		addrb => addrb,
 		Ready => Ready,
-		data_out => dout,
-		dir_que_escribo => dir_que_escribo	
+		data_out => dout
+--		dir_que_escribo => dir_que_escribo	
 	);
 
 end Behavioral;

@@ -53,8 +53,8 @@ ARCHITECTURE behavior OF tb_interleaver IS
          modulacion : IN  std_logic_vector(1 downto 0);
          addrb : IN  std_logic_vector(8 downto 0);
          ready : OUT  std_logic;
-         dout : OUT  std_logic_vector(0 downto 0);
-			dir_que_escribo: out std_logic_vector (8 downto 0)
+         dout : OUT  std_logic_vector(0 downto 0)
+		
         );
     END COMPONENT;
     

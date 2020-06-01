@@ -1,1 +1,0 @@
-vhdtdtfi -prj TRANSMISOR_OFDM -o /home/ise/Xilinx/TRANSMISOR_OFDM/Transmisor.vhi -module Transmisor -template /opt/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work ipcore_dir/ROM.vhd -lib work div_frec.vhd -lib work PPDU.vhd -lib work fec.vhdl -lib work Top_Transmisor.vhd 
