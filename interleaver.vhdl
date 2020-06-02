@@ -45,7 +45,6 @@ entity interleaver is
   addrb:			in  STD_LOGIC_VECTOR(8 downto 0);
   Ready     :  out STD_LOGIC;
   data_out  :  out std_logic_VECTOR(0 DOWNTO 0)
- -- dir_que_escribo: out std_logic_vector (8 DOWNTO 0) -- necesitamos ponerla como salida porque el tb la necesitara para sacarla en un fichero
   );
 end entity;
 architecture arch of interleaver is
@@ -78,16 +77,13 @@ attribute box_type of RAM_interleaver : component is "black_box";
   signal dir,p_dir :STD_LOGIC_VECTOR(8 DOWNTO 0);
   signal write_enable, p_write_enable: STD_LOGIC_VECTOR (0 downto 0);
 
-  
-
 -------------------------------------------------------------------------------
-
-
 
 begin
 
---	dir_que_escribo <= dir;
 	entrada_ram(0)<=data;
+
+-------------------RAM_COMPONENTE--------------------------
 
 MI_Ram_Interleaver : RAM_INTERLEAVER
   PORT MAP (
@@ -101,7 +97,7 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
     doutb => data_out
   );
 
---
+-----------------------------------------------------------
 
 	
 	
@@ -125,7 +121,6 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
     estado <= p_estado;
     cuenta_columnas <= p_cuenta_columnas;
     cuenta_filas <= p_cuenta_filas;
-	
 	 dir <= p_dir;
 	 write_enable <= p_write_enable;
 	end if;
@@ -155,37 +150,29 @@ MI_Ram_Interleaver : RAM_INTERLEAVER
           p_estado <= Escribe;
         end if;
 		  
-		when Escribe =>-------------ESCRIBE---------------------------
+		when Escribe =>-------------ESCRIBE----------------------------
 			
 			p_write_enable <= "1";
-			p_estado <= Desordena;
+			p_estado 		<= Desordena;
 
       when Desordena=>------------DESORDENA--------------------------
 			
-			
-			
-				if(cuenta_filas < n_filas)then
-					p_cuenta_filas <= cuenta_filas + 1;
-					-- p_dir <= dir + n_columnas; como es posible que funcione??
-					p_dir <= std_logic_vector(unsigned(to_signed(n_columnas,9)) + Unsigned(dir));
-					p_estado <= reposo;
-				
-				elsif (cuenta_columnas /= 11) then
-				
-					p_cuenta_filas <= 0;
-					p_cuenta_columnas <= cuenta_columnas + 1 ;					
-					p_estado <= reposo;
-					p_dir <= std_logic_vector(unsigned(to_signed(cuenta_columnas,9)) + 1); --no se pone unsigned("000000001") porque ya es unsigned
-					
-				else
-					p_estado <= Transmite;							
-					
+			if(cuenta_filas < n_filas)then
+				p_cuenta_filas <= cuenta_filas + 1;
+				p_dir <= std_logic_vector(unsigned(to_signed(n_columnas,9)) + Unsigned(dir));
+				p_estado <= reposo;
+			elsif (cuenta_columnas /= 11) then
+				p_cuenta_filas <= 0;
+				p_cuenta_columnas <= cuenta_columnas + 1 ;					
+				p_estado <= reposo;
+				p_dir <= std_logic_vector(unsigned(to_signed(cuenta_columnas,9)) + 1); --no se pone unsigned("000000001") porque ya es unsigned
+
+			else
+				p_estado <= Transmite;							
 					
 				end if;
 							
-				
       when Transmite =>-----------TRANSMITE--------------------------
-
 
         p_ready<='1';
         p_estado<=reposo;

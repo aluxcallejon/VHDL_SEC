@@ -59,60 +59,58 @@ architecture arch of scrambler is
 begin
 
 
-salida <= salida_aux;
+	salida <= salida_aux;
 
 ---------PROCESO SINCRONO------------------------------------------------------
 
-  sinc : process(clk,reset)
-  begin
-    if (reset = '1') then
-
-      registro <= (others => '1');
-      salida_aux   <= '0'        ;
-      dout_val <= '0'            ;
-      estado   <= reposo         ;
-		contador <= (others => '0');
-		contador2 <= (others => '0');
-    elsif (clk'event and clk='1') then
-      registro <= p_registro;
-      salida_aux   <= p_salida  ;
-      dout_val <= p_dout_val;
-      estado   <= p_estado  ;
-		contador <= p_contador;
-		contador2 <= p_contador2;
-    end if;
+	sinc : process(clk,reset)
+		begin
+			if (reset = '1') then
+				registro 	<= (others => '1');
+				salida_aux  <= '0';
+				dout_val 	<= '0';
+				estado   	<= reposo;
+				contador 	<= (others => '0');
+				contador2 	<= (others => '0');
+			elsif (clk'event and clk='1') then
+				registro 	<= p_registro;
+				salida_aux  <= p_salida;
+				dout_val 	<= p_dout_val;
+				estado   	<= p_estado;
+				contador 	<= p_contador;
+				contador2 	<= p_contador2;
+			 end if;
   end process;
 
 ---------PROCESO COMBINACIONAL-------------------------------------------------
 
   fsm : process(registro,estado,salida_aux, data_valid, o1, o2, contador,contador2)
   begin
-    p_dout_val <= '0';
-    p_salida   <= salida_aux;
-    p_estado   <= estado;
-    p_registro <= registro;
-	 p_contador <= contador;
-	 p_contador2 <= contador2;
+  
+    p_dout_val 	<= '0';
+    p_salida   	<= salida_aux;
+    p_estado   	<= estado;
+    p_registro 	<= registro;
+	 p_contador 	<= contador;
+	 p_contador2 	<= contador2;
 
 
     case( estado ) is
 
-      when reposo =>-------------------REPOSO-------------------
+      when reposo =>-------------------REPOSO------------------------
 
       if (data_valid = '1') then
         p_estado <= tx_o1;
-
       end if;
 
-      when tx_o1 =>-----------------------TRANSMITE_O1-------------
-		p_contador2 <= contador2 + 1;
-			
-      p_dout_val <= '1';
-      p_salida <= o1 xor registro(3) xor registro(6);
-      p_estado <= desplaza_o1;
+      when tx_o1 =>-----------------------TRANSMITE_O1---------------
 		
-
-      when desplaza_o1 =>-----------------DESPLAZA_O1--------------
+		p_contador2	<= contador2 + 1;
+      p_dout_val	<= '1';
+      p_salida 	<= o1 xor registro(3) xor registro(6);
+      p_estado 	<= desplaza_o1;
+		
+      when desplaza_o1 =>-----------------DESPLAZA_O1----------------
 		
 		if (contador = "00") then
 			p_registro <= registro(5 downto 0) & (registro(3) xor registro(6)) ;
@@ -124,16 +122,16 @@ salida <= salida_aux;
 			
 		else
 			p_contador <= contador + '1';
-			
 		end if;
 		
 		
 
       when tx_o2 =>-----------------------TRANSMITE_O2-------------
+		
 		p_contador2 <= contador2 + 1;
-      p_dout_val <= '1';
-      p_salida <= o2 xor registro(3) xor registro(6);
-      p_estado <= desplaza_o2;
+      p_dout_val  <= '1';
+      p_salida		<= o2 xor registro(3) xor registro(6);
+      p_estado 	<= desplaza_o2;
 
       when desplaza_o2 =>-----------------DESPLAZA_O2--------------
 

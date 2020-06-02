@@ -45,7 +45,9 @@ end Transmisor;
 
 architecture arquitectura of Transmisor is
 
+-------------------COMPONENTES----------------------------------------------------
 
+-------------------PPDU_FEC_SCRAMBLER_INTERLEAVER----------
 
 COMPONENT ppd_fec_scrambler_interleaver
 	PORT(
@@ -57,6 +59,8 @@ COMPONENT ppd_fec_scrambler_interleaver
 		dout : OUT std_logic_vector(0 downto 0)
 		);
 	END COMPONENT;
+	
+-------------------IFFT------------------------------------
 
 	COMPONENT IFFT  
   PORT (          
@@ -81,8 +85,7 @@ COMPONENT ppd_fec_scrambler_interleaver
   );
 END COMPONENT;
 
-
-
+-------------------MAPPER----------------------------------
 
 		COMPONENT mapper
 	PORT(
@@ -98,19 +101,27 @@ END COMPONENT;
 		dir_interleaver : OUT std_logic_vector(8 downto 0)
 		);
 	END COMPONENT;
+
+-----------------------------------------------------------
 	
-	
+-------------------SIGNALS---------------------------------
+
 signal addrb : STD_LOGIC_VECTOR (8 downto 0);
 signal xn_re,xn_im: STD_logic_vector(7 downto 0);
 signal RFD_IFFT,ready,tx_mapper,entrada_Mapper,unload: STD_logic;
 signal Dato_out :STD_LOGIC_VECTOR(0 downto 0);
 
+-----------------------------------------------------------
 
 attribute box_type : string; 
 attribute box_type of IFFT : component is "black_box"; 
 
 begin
-entrada_Mapper<=dato_out(0);
+
+	entrada_Mapper<=dato_out(0);
+	
+-------------------INSTANCIACION PPDU_FEC_SCRAMBLER--------
+
 	Inst_ppd_fec_scrambler_interleaver: ppd_fec_scrambler_interleaver PORT MAP(
 		clk => clk,
 		reset => reset,
@@ -119,6 +130,9 @@ entrada_Mapper<=dato_out(0);
 		ready => ready,
 		dout => dato_out
 	);
+	
+-------------------INSTANCIACION MAPPER--------------------
+	
 	Inst_mapper: mapper 
 	PORT MAP(
 		clk => clk,
@@ -132,6 +146,8 @@ entrada_Mapper<=dato_out(0);
 		TX => TX_mapper,
 		dir_interleaver => addrb --Direccion del Interleaver controlada por mapper
 	);
+	
+-------------------INSTANCIACION IFFT----------------------
 
 	IFFT_instance : IFFT
   PORT MAP (
