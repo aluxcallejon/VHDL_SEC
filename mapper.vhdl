@@ -31,7 +31,7 @@ use ieee.std_logic_unsigned.all;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 entity mapper is
-  
+
   port (
   clk:     in STD_LOGIC;
   reset:   in STD_LOGIC;
@@ -42,6 +42,9 @@ entity mapper is
   Xn_re:   out std_logic_vector (7 DOWNTO 0);
   Xn_im:   out std_logic_vector (7 DOWNTO 0);
   TX:      out STD_LOGIC; --start del ifft
+  Entrada_RAM_re: out STD_logic_vector(7 downto 0);
+  Entrada_RAM_im: out STD_logic_vector(7 downto 0);
+  dir_mapper: out STD_LOGIC_VECTOR(6 downto 0);
   dir_interleaver: out STD_LOGIC_VECTOR(8 downto 0)
   );
 end entity;
@@ -52,7 +55,7 @@ architecture arch of mapper is
 
 ---------SIGNALS---------------------------------------------------------------
 
-  type status is (Reposo, Agrupar, Calcula_symb, Calcula_datos, escribe_RAM, Transmite);
+  type status is (Reposo, Agrupar, Calcula_symb, Calcula_datos, escribe_RAM,Listo_Transmite, Transmite);
   signal estado,  p_estado   : status;
   signal Nbpc: integer range 1 to 3;
   signal contador_offset,p_contador_offset: unsigned (1 downto 0);
@@ -91,19 +94,22 @@ architecture arch of mapper is
 END COMPONENT;
 
 
-attribute box_type : string; 
+attribute box_type : string;
 
-attribute box_type of RAM_mapper : component is "black_box"; 
+attribute box_type of RAM_mapper : component is "black_box";
 -------------------------------------------------------------------------------
 
 begin
 
+ Entrada_RAM_re<=xn_re_RAM;
+  Entrada_RAM_im<=xn_im_RAM;
+  dir_mapper<=addra;
  dir_interleaver <= dir_interleaver_aux;
  xn_re<=aux_xn_re;
  xn_im<=aux_xn_im;
   ------------- Begin Cut here for INSTANTIATION Template ----- INST_TAG
   ROM : RAM_mapper
-  
+
     PORT MAP (
       clka => clk,
 		rsta => reset,
@@ -187,13 +193,13 @@ begin
        p_phase_ant  <= phase_ant;
        p_Abk        <= Abk;
 		 p_contador_offset<=contador_offset;
-		 
+
 	  case modulacion is
-		 when "00" => Nbpc<=1;	 
+		 when "00" => Nbpc<=1;
 		 when "01" => Nbpc<=2;
 		 when others=>Nbpc<=3;
 		end case;
-		
+
 
    case estado is
 
@@ -207,10 +213,11 @@ begin
    if(dir_interleaver_aux = 96*Nbpc-1) then --Obtenemos los 96 bits
 
            p_group_cont <= 0;
-           p_estado     <= Transmite;
-           p_addra      <= "0000000";
+           p_estado     <= Listo_Transmite;
+			  P_TX<='1';
+           p_addra      <= "1000001";
            p_dir_interleaver <= (others => '0');
- 
+
    else
 
      p_simbolo(2-p_group_cont)<=Entrada;  -- as lo escribimos desde el mas significativo al menos significativo
@@ -241,7 +248,7 @@ begin
            end if;
 
          when "01" => ---------------MODULACION DQPSK---------------------
-				
+
            if (simbolo (2 downto 1) = "00") then
            p_Abk <= "000"; --el equivalente al simbolo '00' en la 8PSK es '000' que se encuentra en la direccion 0 de la ROM
 
@@ -258,7 +265,7 @@ begin
 
 
           when others => ---------------MODULACION D8PSK---------------------
-			 	
+
           if (simbolo = "000") then
             p_Abk <= "000";
 
@@ -341,17 +348,20 @@ begin
       p_dina  <= xn_re_RAM & xn_im_RAM; -- concatenacion
       p_addra <= addra + '1';
       p_estado <= agrupar;
-
-
+	
+ when Listo_Transmite=>
+	if(RFD='1') then
+   p_estado<=Transmite;
+	end if;
     when Transmite =>------------------TRANSMITE--------------------------------
 
-      P_TX<='1';
-		if(RFD='1') then
-			if(contador_offset="11") then
+      
+		
+			if(contador_offset="01") then
 				p_xn_re <= douta (15 downto 8);
 				p_xn_im <= douta (7 downto 0);
 				p_addra <= addra +'1';
-					 if (addra = "1111111") then
+					 if (addra = "1000000") then
 						p_addra <= "0001111";
 						p_estado <= reposo;
 						p_contador_offset<=(others=>'0');
@@ -362,7 +372,7 @@ begin
 		   p_contador_offset<=contador_offset+ 1;
 
 			end if;
-	end if;
+	
   end case;
 end process;
 

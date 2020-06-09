@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2020-06-01T11:02:22</DateModified>
+  <DateModified>2020-06-09T13:52:02</DateModified>
   <ModuleName>Transmisor</ModuleName>
   <SummaryTimeStamp>2020-05-31T06:12:25</SummaryTimeStamp>
-  <SavedFilePath>/home/ise/Xilinx/TRANSMISOR_OFDM/iseconfig/Transmisor.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/ise/Xilinx/TRANSMISOR_OFDM/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/ise/SEC/TRANSMISOR_OFDM/iseconfig/Transmisor.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/ise/SEC/TRANSMISOR_OFDM/</ImplementationReportsDirectory>
   <DateInitialized>2020-05-31T03:54:49</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

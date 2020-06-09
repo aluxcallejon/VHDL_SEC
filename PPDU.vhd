@@ -74,7 +74,6 @@ architecture PPDU_ARQ of PPDU is
 	END COMPONENT;
 
 -------------------DIV_FREC-------------------------
-
 	COMPONENT div_frec is
 	GENERIC(
 	MAX_CUENTA:integer:=50000);
@@ -85,12 +84,14 @@ architecture PPDU_ARQ of PPDU is
 	);
 	END COMPONENT;
 
+
+
 ---------END_COMPONENTS-----------------------------------------------------------
 
 
-attribute box_type : string; 
+attribute box_type : string;
 
-attribute box_type of ROM1 : component is "black_box"; 
+attribute box_type of ROM1 : component is "black_box";
 begin
 
 ---------INSTANCIACIONES----------------------------------------------------------
@@ -179,7 +180,7 @@ case( estado ) is
 		if (sat='1' and douta/="00000000") then
 			p_estado <= reset_ceros;
 		end if;
-	
+
 		if (sat='1' and douta="00000000" and flag = '0') then
 			p_estado <= TX_ceros_decide;
 		end if;

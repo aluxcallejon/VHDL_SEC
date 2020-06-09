@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -o "/home/ise/Xilinx/TRANSMISOR_OFDM/Tb_Transmisor_isim_beh.exe" -prj "/home/ise/Xilinx/TRANSMISOR_OFDM/Tb_Transmisor_beh.prj" "work.Tb_Transmisor" 
+-intstyle "ise" -incremental -o "/home/ise/SEC/TRANSMISOR_OFDM/Tb_Transmisor_isim_beh.exe" -prj "/home/ise/SEC/TRANSMISOR_OFDM/Tb_Transmisor_beh.prj" "work.Tb_Transmisor" 
